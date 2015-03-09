@@ -255,8 +255,11 @@
     <Compile Include="Utils\Extentions\ViewDataExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\floatLabel.css" />
     <Content Include="Scripts\app\account\login.js" />
     <Content Include="Scripts\app\home\home.js" />
+    <Content Include="Scripts\lib\floatLabel.js" />
+    <Content Include="Scripts\lib\jquery.livequery.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\app\durandal\flickr.js" />
     <Content Include="Scripts\app\durandal\shell.js" />

@@ -13,27 +13,27 @@
 define('jquery', function () { return jQuery; });
 define('knockout', ko);
 
-define(['jquery', 'durandal/system', 'durandal/app', 'durandal/viewLocator', 'durandal/viewEngine'], function ($, system, app, viewLocator, viewEngine) {
-    //>>excludeStart("build", true);
-    system.debug(true);
-    //>>excludeEnd("build");
-    debugger;
-    app.title = 'Durandal Starter Kit';
+define(['jquery', 'durandal/system', 'durandal/app', 'durandal/viewLocator', 'durandal/viewEngine', 'durandal/composition'],
+    function ($, system, app, viewLocator, viewEngine, composition) {
+        //>>excludeStart("build", true);
+        system.debug(true);
+        //>>excludeEnd("build");
 
-    app.configurePlugins({
-        router: true,
-        dialog: true
-    });
+        app.title = 'Durandal Starter Kit';
 
-    $.getJSON('api/AccountApi').done(function (isAuthenticated) {
-        debugger;
-        app.start().then(function () {
-            debugger;
-            viewLocator.useConvention();
-            viewEngine.viewExtension = '/';
-            app.setRoot(isAuthenticated ? 'app/home/home' : 'app/account/login', 'entrance');
+        app.configurePlugins({
+            router: true,
+            dialog: true
         });
-    }).fail(function () {
-        console.log("error");
+
+        $.getJSON('api/AccountApi').done(function (isAuthenticated) {
+            app.start().then(function () {
+                viewLocator.useConvention();
+                viewEngine.viewExtension = '/';
+                app.setRoot(isAuthenticated ? 'app/home/home' : 'app/account/login', 'entrance');
+            });
+        }).fail(function () {
+            console.log("error");
+        });
+
     });
-});

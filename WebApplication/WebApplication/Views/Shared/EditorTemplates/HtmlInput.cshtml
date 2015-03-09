@@ -1,9 +1,13 @@
 ﻿@using WebApplication.Utils.Extentions
 
-<label class="control-label">@ViewData.ModelMetadata.DisplayName</label>
+@{
+    ViewData.TemplateInfo.FormattedModelValue = "asd";
+    var labelClass = ViewData.TemplateInfo.FormattedModelValue.ToString() == string.Empty ? string.Empty : "active";
+}
 
 <input name="@ViewData.TemplateInfo.HtmlFieldPrefix"
-       type=@ViewData["type"]
-       class="form-control"
-       @ViewData.AdditionalData()
-       value=@ViewData.TemplateInfo.FormattedModelValue />
+       type="@ViewData["type"]"
+       class="floatLabel"
+       @ViewData.DataBinding()
+       value="@ViewData.TemplateInfo.FormattedModelValue" />
+<label class="@labelClass" for="@ViewData.TemplateInfo.HtmlFieldPrefix">@ViewData.ModelMetadata.DisplayName</label>

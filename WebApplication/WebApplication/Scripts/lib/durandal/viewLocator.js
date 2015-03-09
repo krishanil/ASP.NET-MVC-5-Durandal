@@ -37,7 +37,7 @@ define(['durandal/system', 'durandal/viewEngine'], function (system, viewEngine)
          * @param {string} [areasPath] Partial views are mapped to the "views" folder if not specified. Use this parameter to change their location.
          */
         useConvention: function (modulesPath, viewsPath, areasPath) {
-            debugger;
+            
             modulesPath = modulesPath || 'app';
             viewsPath = viewsPath || '';
             areasPath = areasPath || viewsPath;

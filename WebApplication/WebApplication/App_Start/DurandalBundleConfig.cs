@@ -21,6 +21,8 @@ namespace WebApplication
                   .Include("~/Scripts/lib/bootstrap.js")
                   .Include("~/Scripts/lib/respond.js")
                   .Include("~/Scripts/lib/knockout-{version}.js")
+                  .Include("~/Scripts/lib/jquery.livequery.js")
+                  .Include("~/Scripts/lib/floatLabel.js")
               );
 
             bundles.Add(
@@ -31,6 +33,7 @@ namespace WebApplication
                 .Include("~/Content/durandal.css")
                 .Include("~/Content/starterkit.css")
                 .Include("~/Content/Site.css")
+                .Include("~/Content/floatLabel.css")
               );
         }
 
