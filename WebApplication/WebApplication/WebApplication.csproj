@@ -252,6 +252,7 @@
     <Compile Include="Results\ActionChallengeResult.cs" />
     <Compile Include="Results\UnauthorizedChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\Extentions\ViewDataExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\app\account\login.js" />
