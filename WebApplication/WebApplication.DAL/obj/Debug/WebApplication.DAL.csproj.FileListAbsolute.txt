@@ -1,0 +1,5 @@
+c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.DAL\bin\Debug\WebApplication.DAL.dll
+c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.DAL\bin\Debug\WebApplication.DAL.pdb
+c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.dll
+c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.pdb
+c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.csprojResolveAssemblyReference.cache

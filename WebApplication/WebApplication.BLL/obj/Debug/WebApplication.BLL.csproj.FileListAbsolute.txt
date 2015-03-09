@@ -1,0 +1,5 @@
+c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.BLL\bin\Debug\WebApplication.BLL.dll
+c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.BLL\bin\Debug\WebApplication.BLL.pdb
+c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.dll
+c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.pdb
+c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.csprojResolveAssemblyReference.cache
