@@ -255,6 +255,7 @@
     <Compile Include="Utils\Extentions\ViewDataExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\checkbox.css" />
     <Content Include="Content\floatLabel.css" />
     <Content Include="Scripts\app\account\login.js" />
     <Content Include="Scripts\app\home\home.js" />

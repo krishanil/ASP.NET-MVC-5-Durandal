@@ -1,5 +1,6 @@
-﻿@{ Layout = "~/Views/Shared/EditorTemplates/_Layout.cshtml"; }
- 
+﻿@using WebApplication.Utils.Extentions
+@{ Layout = "~/Views/Shared/EditorTemplates/_Layout.cshtml"; }
+
 @{
     bool? value = null;
     if (ViewData.Model != null)
@@ -7,7 +8,6 @@
         value = Convert.ToBoolean(ViewData.Model, System.Globalization.CultureInfo.InvariantCulture);
     }
 }
-
 @if (ViewData.ModelMetadata.IsNullableValueType)
 {
 
@@ -17,9 +17,16 @@
         new SelectListItem {Text = "True", Value = "true", Selected = value.HasValue && value.Value},
         new SelectListItem {Text = "False", Value = "false", Selected = value.HasValue && !value.Value},
     };
-    @Html.DropDownList("", triStateValues, new {@class = "list-box tri-state"})
+    @Html.DropDownList("", triStateValues, new { @class = "list-box tri-state" })
 }
 else
 {
-    @Html.CheckBox("", value ?? false, new {@class = "check-box"})
+    var yes = string.Format("{0}!", ViewData.ModelMetadata.DisplayName);
+    var no = string.Format("{0}?", ViewData.ModelMetadata.DisplayName);
+    <input id="@ViewData.TemplateInfo.HtmlFieldPrefix"
+           type="checkbox"
+           class="tgl tgl-flip"
+        @ViewData.DataBinding()/>
+//           value="@ViewData.TemplateInfo.FormattedModelValue" />
+    <label class="tgl-btn" data-tg-off="@no" data-tg-on="@yes" for="@ViewData.TemplateInfo.HtmlFieldPrefix"></label>
 }

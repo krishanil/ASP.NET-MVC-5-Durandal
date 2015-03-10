@@ -34,6 +34,7 @@ namespace WebApplication
                 .Include("~/Content/starterkit.css")
                 .Include("~/Content/Site.css")
                 .Include("~/Content/floatLabel.css")
+                .Include("~/Content/checkbox.css")
               );
         }
 
