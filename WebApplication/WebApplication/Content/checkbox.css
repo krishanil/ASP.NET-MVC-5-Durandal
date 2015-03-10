@@ -314,3 +314,7 @@
     -o-transform: rotateX(20deg);
     transform: rotateX(20deg);
 }
+
+.tgl-btn:hover:before, .tgl-btn:hover:after  {
+   text-shadow: 1px 1px 5px #000;
+}
