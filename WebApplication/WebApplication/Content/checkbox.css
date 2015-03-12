@@ -14,6 +14,10 @@
     margin: 0 2em;
 }
 
+label.tgl-btn {
+    cursor: pointer !important;
+}
+
 .tgl {
     display: none;
 }
@@ -316,5 +320,5 @@
 }
 
 .tgl-btn:hover:before, .tgl-btn:hover:after  {
-   text-shadow: 1px 1px 5px #000;
+   text-shadow: 1px 1px 3px #fff;
 }

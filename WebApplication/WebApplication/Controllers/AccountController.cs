@@ -33,5 +33,12 @@ namespace WebApplication.Controllers
         {
             return View(new LoginViewModel());
         }
+
+        // GET: Account/Register
+        [AllowAnonymous]
+        public ViewResult Register()
+        {
+            return View(new RegisterViewModel());
+        }
     }
 }

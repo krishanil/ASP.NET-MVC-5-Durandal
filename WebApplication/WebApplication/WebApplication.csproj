@@ -259,6 +259,7 @@
     <Content Include="Content\checkbox.css" />
     <Content Include="Content\floatLabel.css" />
     <Content Include="Scripts\app\account\login.js" />
+    <Content Include="Scripts\app\account\register.js" />
     <Content Include="Scripts\app\home\home.js" />
     <Content Include="Scripts\lib\floatLabel.js" />
     <Content Include="Scripts\main.js" />

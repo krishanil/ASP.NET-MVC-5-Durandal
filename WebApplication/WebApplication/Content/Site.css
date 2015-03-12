@@ -28,6 +28,10 @@ textarea {
     padding-top: 20px;
 }
 
+a {
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 767px) {
     .nofloat {
         float: none;

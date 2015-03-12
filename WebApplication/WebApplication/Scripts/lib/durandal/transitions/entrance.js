@@ -25,6 +25,10 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
         opacity: ''
     };
 
+    var startPosition = {
+        position: 'relative'
+    }
+
     var isIE = navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/MSIE/);
 
     var animation = false,
@@ -84,7 +88,7 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
                 var startValues = {
                     display: 'block',
                     opacity: 0,
-                    position: 'absolute',
+                    position: 'relative',
                     left: fadeOnly || animation ? '0px' : '20px',
                     right: 0,
                     top: 0,
@@ -92,20 +96,22 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
                 };
 
                 function startTransition() {
+                    
                     scrollIfNeeded();
                     context.triggerAttach();
 
                     if (animation) {
                         removeAnimationClasses(context.child, fadeOnly);
+                        $child.css(startPosition);                                                
                         context.child.classList.add(fadeOnly ? 'entrance-in-fade' : 'entrance-in');
-                        setTimeout(function () {
-                            removeAnimationClasses(context.child, fadeOnly);
-                            if(context.activeView){
-                                removeAnimationClasses(context.activeView, fadeOnly);
-                            }
-                            $child.css(clearValues);
-                            endTransition();
-                        }, duration);
+//                        setTimeout(function () {
+//                            removeAnimationClasses(context.child, fadeOnly);
+//                            if(context.activeView){
+//                                removeAnimationClasses(context.activeView, fadeOnly);
+//                            }
+//                            $child.css(clearValues);
+//                            endTransition();
+//                        }, duration);
                     } else {
                         $child.animate(endValues, {
                             duration: duration,
@@ -118,6 +124,7 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
                     }
                 }
 
+                endTransition();
                 $child.css(startValues);
 
                 if(context.activeView) {

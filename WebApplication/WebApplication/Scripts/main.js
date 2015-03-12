@@ -13,20 +13,31 @@
 define('jquery', function () { return jQuery; });
 define('knockout', ko);
 
-define(['jquery', 'durandal/system', 'durandal/app', 'durandal/viewLocator', 'durandal/viewEngine', 'durandal/composition'],
-    function ($, system, app, viewLocator, viewEngine, composition) {
-        //>>excludeStart("build", true);
-        system.debug(true);
-        //>>excludeEnd("build");
+define(['jquery', 'durandal/system', 'durandal/app', 'durandal/viewLocator', 'durandal/viewEngine','plugins/router', 'knockout'],
+    function ($, system, app, viewLocator, viewEngine, router, ko) {
 
-        app.title = 'Durandal Starter Kit';
+        app.title = 'Durandal web application';
 
-        app.configurePlugins({
-            router: true,
-            dialog: true
-        });
+        app.model = {
+            IsAuthenticated: ko.observable(false),
+            Login: function () {
+                debugger;
+                return router.navigate('app/account/login', false);
+            },
+            Register: function() {
+                debugger;
+                return router.navigate('app/account/register', false);
+            },
+            Home: function() {
+                debugger;
+                return router.navigate('app/home/home');
+            },
+        }
+
+        ko.applyBindings(app.model, $('body')[0]);
 
         $.getJSON('api/AccountApi').done(function (isAuthenticated) {
+            app.model.IsAuthenticated(isAuthenticated);
             app.start().then(function () {
                 viewLocator.useConvention();
                 viewEngine.viewExtension = '/';
@@ -36,4 +47,8 @@ define(['jquery', 'durandal/system', 'durandal/app', 'durandal/viewLocator', 'du
             console.log("error");
         });
 
+        app.configurePlugins({
+            router: true,
+            dialog: true
+        });
     });

@@ -44,9 +44,11 @@
         .controls select:hover {
             outline: none;
             border-color: #9FB1C1;
+            box-shadow: 1px 1px 3px #ccc;
         }
 
-            .controls input[type="text"]:focus + label, .controls input[type="text"]:hover + label,
+            .controls input[type="text"]:focus + label, 
+            .controls input[type="text"]:hover + label,
             .controls input[type="email"]:focus + label,
             .controls input[type="email"]:hover + label,
             .controls input[type="password"]:focus + label,
@@ -58,9 +60,11 @@
             .controls button:focus + label,
             .controls button:hover + label,
             .controls select:focus + label,
-            .controls select:hover + label {
+            .controls select:hover + label,
+            .controls label:hover {
                 color: #077ABC;
                 cursor: text;
+                text-shadow: 1px 1px 3px #077ABC;
             }
 
     .controls .fa-sort {
@@ -90,12 +94,14 @@
         -o-transition: color 0.3s, top 0.3s, background-color 0.8s;
         -webkit-transition: color 0.3s, top 0.3s, background-color 0.8s;
         transition: color 0.3s, top 0.3s, background-color 0.8s;
+        cursor: text;
     }
 
         .controls label.active {
             top: -10px;
             color: #555;
             background-color: white;
+            cursor: default;
         }
 
     .controls textarea {

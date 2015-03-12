@@ -5,6 +5,6 @@
 <input name="@ViewData.TemplateInfo.HtmlFieldPrefix"
        type="@ViewData["type"]"
        class="floatLabel"
-       @ViewData.DataBinding()
+       data-bind="@ViewData.DataBinding()"
        value="@ViewData.TemplateInfo.FormattedModelValue" />
 <label class="@labelClass" for="@ViewData.TemplateInfo.HtmlFieldPrefix">@ViewData.ModelMetadata.DisplayName</label>

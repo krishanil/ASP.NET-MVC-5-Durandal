@@ -292,6 +292,6 @@ D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\bin\ko\System.Spa
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\bin\ru\System.Spatial.resources.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\bin\zh-Hans\System.Spatial.resources.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\bin\zh-Hant\System.Spatial.resources.dll
-D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
