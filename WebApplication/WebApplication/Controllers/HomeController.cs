@@ -9,7 +9,13 @@ namespace WebApplication.Controllers
         public ActionResult Index(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View("Shell");
+            return View("Loading");
+        }
+
+        [AllowAnonymous]
+        public ActionResult Shell()
+        {
+            return View();
         }
 
         //[AllowAnonymous]

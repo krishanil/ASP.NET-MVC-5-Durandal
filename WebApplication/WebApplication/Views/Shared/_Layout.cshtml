@@ -27,39 +27,9 @@
     </script>
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" data-bind="click: Home">Web application</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" data-bind="visible: IsAuthenticated" style="display: none">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Administration", "Index", "Admin", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>
-                </ul>
-                @{ Html.RenderPartial("_LoginPartial"); }
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        <div id="applicationHost">
-            @RenderBody()
-        </div>
-        @Scripts.Render("~/Scripts/vendor")
-        <script type="text/javascript" src="~/Scripts/lib/require.js" data-main="/Scripts/main"></script>
-    </div>
-    <footer class="container navbar-fixed-bottom">
-        <hr />
-        <address>
-            &copy; @DateTime.Now.Year - ASP.NET Application / Author: Alexey Voroshak
-        </address>
-    </footer>
+<body id="applicationHost">
+    @RenderBody()
+    @Scripts.Render("~/Scripts/vendor")
+    <script type="text/javascript" src="~/Scripts/lib/require.js" data-main="/Scripts/main"></script>
 </body>
 </html>

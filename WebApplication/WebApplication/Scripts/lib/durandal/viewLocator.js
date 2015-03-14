@@ -36,8 +36,7 @@ define(['durandal/system', 'durandal/viewEngine'], function (system, viewEngine)
          * @param {string} [viewsPath] The replacement for the modulesPath. If not specified, the replacement is 'views'.
          * @param {string} [areasPath] Partial views are mapped to the "views" folder if not specified. Use this parameter to change their location.
          */
-        useConvention: function (modulesPath, viewsPath, areasPath) {
-            
+        useConvention: function(modulesPath, viewsPath, areasPath) {
             modulesPath = modulesPath || 'app';
             viewsPath = viewsPath || '';
             areasPath = areasPath || viewsPath;

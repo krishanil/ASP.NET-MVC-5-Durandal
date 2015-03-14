@@ -5,6 +5,6 @@ c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\Web
 c:\Users\Алексей\Documents\Visual Studio 2013\Projects\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.csprojResolveAssemblyReference.cache
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\bin\Debug\WebApplication.DAL.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\bin\Debug\WebApplication.DAL.pdb
-D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.csprojResolveAssemblyReference.cache
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.pdb
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.csprojResolveAssemblyReference.cache

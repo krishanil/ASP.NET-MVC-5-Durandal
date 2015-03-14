@@ -361,6 +361,7 @@
     <Content Include="Scripts\lib\sammy-0.7.5.min.js" />
     <Content Include="Scripts\lib\text.js" />
     <Content Include="Scripts\lib\_references.js" />
+    <Content Include="Scripts\app\home\shell.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -383,7 +384,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
@@ -442,6 +442,7 @@
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_Layout.cshtml" />
     <Content Include="Views\Shared\Shell.cshtml" />
+    <Content Include="Views\Shared\Loading.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\app\auth\" />
