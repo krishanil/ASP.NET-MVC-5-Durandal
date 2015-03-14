@@ -12,6 +12,7 @@ namespace WebApplication.Controllers
             return View("Shell");
         }
 
+        //[AllowAnonymous]
         public ActionResult Home()
         {
             return View();

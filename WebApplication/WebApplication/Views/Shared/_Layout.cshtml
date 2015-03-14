@@ -49,7 +49,9 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
+        <div id="applicationHost">
+            @RenderBody()
+        </div>
         @Scripts.Render("~/Scripts/vendor")
         <script type="text/javascript" src="~/Scripts/lib/require.js" data-main="/Scripts/main"></script>
     </div>

@@ -13,42 +13,62 @@
 define('jquery', function () { return jQuery; });
 define('knockout', ko);
 
-define(['jquery', 'durandal/system', 'durandal/app', 'durandal/viewLocator', 'durandal/viewEngine','plugins/router', 'knockout'],
+define(['jquery', 'durandal/system', 'durandal/app', 'durandal/viewLocator', 'durandal/viewEngine', 'plugins/router', 'knockout'],
     function ($, system, app, viewLocator, viewEngine, router, ko) {
 
         app.title = 'Durandal web application';
 
+        app.configurePlugins({
+            router: true,
+            dialog: true
+        });
+
         app.model = {
+            viewExtension: '/',
+            animation: 'entrance',
+
+            currentModule: '',
+            loginModule: 'app/account/login',
+            registerModule: 'app/account/register',
+            homeModule: 'app/home/home',
+
+            apiIsAuthUrl: 'api/AccountApi',
+
             IsAuthenticated: ko.observable(false),
-            Login: function () {
-                debugger;
-                return router.navigate('app/account/login', false);
+
+            Login: function (model, event) {
+                model.gotoModule(model, model.loginModule);
             },
-            Register: function() {
-                debugger;
-                return router.navigate('app/account/register', false);
+
+            Register: function (model, event) {
+                model.gotoModule(model, model.registerModule);
             },
-            Home: function() {
-                debugger;
-                return router.navigate('app/home/home');
+
+            Home: function (model, event) {
+                if (model.IsAuthenticated()) {
+                    model.gotoModule(model, model.homeModule);
+                }
             },
+
+            gotoModule: function (model, modelPath) {
+                if (model.currentModule != modelPath) {
+                    model.currentModule = modelPath;
+                    app.setRoot(model.currentModule, model.animation);
+                }
+            }
         }
 
         ko.applyBindings(app.model, $('body')[0]);
 
-        $.getJSON('api/AccountApi').done(function (isAuthenticated) {
+        $.getJSON(app.model.apiIsAuthUrl).done(function (isAuthenticated) {
             app.model.IsAuthenticated(isAuthenticated);
             app.start().then(function () {
                 viewLocator.useConvention();
                 viewEngine.viewExtension = '/';
-                app.setRoot(isAuthenticated ? 'app/home/home' : 'app/account/login', 'entrance');
+                app.model.currentModule = isAuthenticated ? app.model.homeModule : app.model.loginModule;
+                app.setRoot(app.model.currentModule, app.model.animation);
             });
         }).fail(function () {
             console.log("error");
-        });
-
-        app.configurePlugins({
-            router: true,
-            dialog: true
         });
     });
