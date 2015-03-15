@@ -262,6 +262,8 @@
     <Content Include="Scripts\app\account\register.js" />
     <Content Include="Scripts\app\home\home.js" />
     <Content Include="Scripts\lib\floatLabel.js" />
+    <Content Include="Scripts\lib\linq\jquery.linq.js" />
+    <Content Include="Scripts\lib\linq\linq.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\app\durandal\flickr.js" />
     <Content Include="Scripts\app\durandal\shell.js" />
@@ -362,7 +364,6 @@
     <Content Include="Scripts\lib\text.js" />
     <Content Include="Scripts\lib\_references.js" />
     <Content Include="Scripts\app\home\shell.js" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -388,6 +389,7 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

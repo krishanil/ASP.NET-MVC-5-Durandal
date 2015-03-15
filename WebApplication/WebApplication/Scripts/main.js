@@ -7,15 +7,19 @@
 
         'lib': '/Scripts/lib',
         'app': '/Scripts/app',
+
+        'linq': '/Scripts/lib/linq/linq',
+        'jlinq': '/Scripts/lib/linq/jquery.linq'
     }
 });
 
 define('jquery', function () { return jQuery; });
 define('knockout', ko);
+define('linq', function () { return Enumerable.From; });
 
 define(['durandal/app', 'durandal/viewLocator', 'durandal/viewEngine'],
 function (app, viewLocator, viewEngine) {
-
+    
     app.title = 'Durandal web application';
 
     app.configurePlugins({

@@ -5,10 +5,16 @@ namespace WebApplication.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        private bool IsInit {
+            get { return Session["Init"] is bool && (bool)Session["Init"]; }
+            set { Session["Init"] = value; }
+        }
+
         [AllowAnonymous]
-        public ActionResult Index(string returnUrl)
+        public ActionResult Index()
         {
-            ViewBag.ReturnUrl = returnUrl;
+//            if (IsInit) return new EmptyResult();
+//            IsInit = true;
             return View("Loading");
         }
 
@@ -18,7 +24,7 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult Home()
         {
             return View();

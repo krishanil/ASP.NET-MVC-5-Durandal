@@ -10,8 +10,8 @@
  * @requires composition
  * @requires jquery
  */
-define(['durandal/system', 'durandal/composition', 'jquery'], function(system, composition, $) {
-    var fadeOutDuration = 100;
+define(['durandal/system', 'durandal/composition', 'jquery'], function (system, composition, $) {
+    var fadeOutDuration = 300;
     var endValues = {
         left: '0px',
         opacity: 1
@@ -54,7 +54,7 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
         system.log('Using jQuery animations.');
     }
 
-    function removeAnimationClasses(ele, fadeOnly){
+    function removeAnimationClasses(ele, fadeOnly) {
         ele.classList.remove(fadeOnly ? 'entrance-in-fade' : 'entrance-in');
         ele.classList.remove('entrance-out');
     }
@@ -64,7 +64,7 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
      * @constructor
      */
     var entrance = function(context) {
-        return system.defer(function(dfd) {
+        return system.defer(function (dfd) {
             function endTransition() {
                 dfd.resolve();
             }
@@ -78,13 +78,13 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
             if (!context.child) {
                 $(context.activeView).fadeOut(fadeOutDuration, endTransition);
             } else {
-                var duration = context.duration || 500;
+                var duration = context.duration || 600;
                 var $child = $(context.child);
                 var fadeOnly = !!context.fadeOnly;
                 var startValues = {
                     display: 'block',
                     opacity: 0,
-                    position: 'relative',
+                    position: $($child).parents('.durandal-wrapper').length > 0 ? 'relative' : 'absolute',
                     left: fadeOnly || animation ? '0px' : '20px',
                     right: 0,
                     top: 0,
@@ -97,9 +97,9 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
 
                     if (animation) {
                         removeAnimationClasses(context.child, fadeOnly);
+                        $child.css(startValues);
                         context.child.classList.add(fadeOnly ? 'entrance-in-fade' : 'entrance-in');
                         setTimeout(function () {
-                            debugger;
                             removeAnimationClasses(context.child, fadeOnly);
                             if(context.activeView){
                                 removeAnimationClasses(context.activeView, fadeOnly);
@@ -119,13 +119,15 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
                     }
                 }
 
-                $child.css(startValues);
 
                 if(context.activeView) {
                     if (animation && !isIE) {
                         removeAnimationClasses(context.activeView, fadeOnly);
                         context.activeView.classList.add('entrance-out');
-                        setTimeout(startTransition, fadeOutDuration);
+                        setTimeout(function() {
+                            $(context.activeView).css({'display':'none'});
+                            startTransition();
+                        }, fadeOutDuration);
                     } else {
                         $(context.activeView).fadeOut({ duration: fadeOutDuration, always: startTransition });
                     }

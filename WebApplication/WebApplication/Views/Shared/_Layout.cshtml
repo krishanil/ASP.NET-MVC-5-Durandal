@@ -27,8 +27,16 @@
     </script>
 
 </head>
-<body id="applicationHost">
-    @RenderBody()
+<body>
+    <div id="applicationHost">
+        @RenderBody()
+    </div>
+    <footer class="container navbar-fixed-bottom">
+        <hr />
+        <address>
+            &copy; @DateTime.Now.Year - ASP.NET Application / Author: Alexey Voroshak
+        </address>
+    </footer>
     @Scripts.Render("~/Scripts/vendor")
     <script type="text/javascript" src="~/Scripts/lib/require.js" data-main="/Scripts/main"></script>
 </body>
