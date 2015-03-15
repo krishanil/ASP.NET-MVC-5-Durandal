@@ -1,4 +1,4 @@
-﻿define(['plugins/router', 'linq', 'knockout'], function (router, linq, ko) {
+﻿define(['plugins/router', 'linq', 'knockout', 'jquery'], function (router, linq, ko, $) {
     return {
         isAuthenticated: false,
         brandHash: ko.observable(),

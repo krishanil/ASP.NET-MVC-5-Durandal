@@ -47,24 +47,24 @@
             box-shadow: 1px 1px 3px #ccc;
         }
 
-            .controls input[type="text"]:focus + label, 
-            .controls input[type="text"]:hover + label,
-            .controls input[type="email"]:focus + label,
-            .controls input[type="email"]:hover + label,
-            .controls input[type="password"]:focus + label,
-            .controls input[type="password"]:hover + label,
-            .controls input[type="tel"]:focus + label,
-            .controls input[type="tel"]:hover + label,
-            .controls textarea:focus + label,
-            .controls textarea:hover + label,
-            .controls button:focus + label,
-            .controls button:hover + label,
-            .controls select:focus + label,
-            .controls select:hover + label,
+            .controls input[type="text"]:focus ~ label, 
+            .controls input[type="text"]:hover ~ label,
+            .controls input[type="email"]:focus ~ label,
+            .controls input[type="email"]:hover ~ label,
+            .controls input[type="password"]:focus ~ label,
+            .controls input[type="password"]:hover ~ label,
+            .controls input[type="tel"]:focus ~ label,
+            .controls input[type="tel"]:hover ~ label,
+            .controls textarea:focus ~ label,
+            .controls textarea:hover ~ label,
+            .controls button:focus ~ label,
+            .controls button:hover ~ label,
+            .controls select:focus ~ label,
+            .controls select:hover ~ label,
             .controls label:hover {
                 color: #077ABC;
                 cursor: text;
-                text-shadow: 1px 1px 3px #077ABC;
+                text-shadow: 1px 1px 1px #077ABC;
             }
 
     .controls .fa-sort {
@@ -129,4 +129,32 @@
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-color: white !important;
     color: #999 !important;
+}
+
+/* validation */
+span.validationMessage {
+        position: absolute;
+        left: 8px;
+        top: 30px;
+        color: red;
+        font-size: xx-small;
+        display: inline-block;
+        padding: 0 10px;
+        font-weight: 400;
+        background-color: white;
+        -moz-transition: color 0.3s, top 0.3s, background-color 0.8s;
+        -o-transition: color 0.3s, top 0.3s, background-color 0.8s;
+        -webkit-transition: color 0.3s, top 0.3s, background-color 0.8s;
+        transition: color 0.3s, top 0.3s, background-color 0.8s;
+        cursor: text;
+    }
+
+label.error.active {
+    color: red;
+    text-shadow: none;
+}
+
+input.error {
+    border-bottom-color: red !important;
+    /*box-shadow: 0px 1px 1px red;*/
 }

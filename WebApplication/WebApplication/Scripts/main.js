@@ -17,8 +17,8 @@ define('jquery', function () { return jQuery; });
 define('knockout', ko);
 define('linq', function () { return Enumerable.From; });
 
-define(['durandal/app', 'durandal/viewLocator', 'durandal/viewEngine'],
-function (app, viewLocator, viewEngine) {
+define(['durandal/app', 'durandal/viewLocator', 'durandal/viewEngine', 'knockout'],
+function (app, viewLocator, viewEngine, ko) {
     
     app.title = 'Durandal web application';
 
@@ -35,4 +35,5 @@ function (app, viewLocator, viewEngine) {
         viewEngine.viewExtension = '/';
         app.setRoot('app/home/shell', 'entrance');
     });
+
 });

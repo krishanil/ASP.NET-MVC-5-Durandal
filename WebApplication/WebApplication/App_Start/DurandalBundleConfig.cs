@@ -21,6 +21,7 @@ namespace WebApplication
                   .Include("~/Scripts/lib/bootstrap.js")
                   .Include("~/Scripts/lib/respond.js")
                   .Include("~/Scripts/lib/knockout-{version}.js")
+                  .Include("~/Scripts/lib/knockout.validation.js")
                   .Include("~/Scripts/lib/jquery.livequery.js")
                   .Include("~/Scripts/lib/linq/linq.js")
                   .Include("~/Scripts/lib/linq/jquery.linq.js")

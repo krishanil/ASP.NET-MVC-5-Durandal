@@ -320,5 +320,5 @@ label.tgl-btn {
 }
 
 .tgl-btn:hover:before, .tgl-btn:hover:after  {
-   text-shadow: 1px 1px 3px #fff;
+   text-shadow: 1px 1px 1px #fff;
 }
