@@ -1,6 +1,7 @@
 using System.Web.Optimization;
+using WebApplication;
 
-[assembly: WebActivator.PostApplicationStartMethod(typeof(WebApplication.DurandalConfig), "PreStart")]
+[assembly: WebActivator.PostApplicationStartMethod(typeof(DurandalConfig), "PreStart")]
 
 namespace WebApplication
 {

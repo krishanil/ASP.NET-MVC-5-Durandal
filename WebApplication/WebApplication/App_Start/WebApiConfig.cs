@@ -1,10 +1,6 @@
-﻿using System.Web.Http;
+using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
-
-using System.Web.Http.OData.Builder;
-using System.Web.Http.OData.Extensions;
-using WebApplication.Models;
 
 namespace WebApplication
 {
@@ -12,9 +8,6 @@ namespace WebApplication
     {
         public static void Register(HttpConfiguration config)
         {
-            var builder = new ODataConventionModelBuilder();
-            builder.EntitySet<ApplicationUser>("AccountApi");
-
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
@@ -31,8 +24,6 @@ namespace WebApplication
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            
-            config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
         }
     }
 }
