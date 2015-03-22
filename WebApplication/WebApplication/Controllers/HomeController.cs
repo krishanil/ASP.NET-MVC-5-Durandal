@@ -8,7 +8,6 @@ namespace WebApplication.Controllers
         [AllowAnonymous]
         public ViewResult Loading()
         {
-            ViewBag.Title = "Loading | Web application";
             return View();
         }
 

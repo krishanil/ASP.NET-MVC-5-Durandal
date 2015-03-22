@@ -19,23 +19,19 @@ using System.Linq;
 
 namespace WebApplication.Controllers
 {
-    
     [Authorize]
-    [RoutePrefix("api/Account")]    
+    [RoutePrefix("api/Account")]
     public class AccountApiController : ApiController
     {
         private const string LocalLoginProvider = "Local";
         private const string DefaultUserRole = "RegisteredUsers";
 
         private ApplicationUserManager _userManager;
-        
-        public AccountApiController():this(Startup.OAuthOptions.AccessTokenFormat)
-        {
-        }
+
+        public AccountApiController() : this(Startup.OAuthOptions.AccessTokenFormat) { }
 
         public AccountApiController(ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
-            //
             AccessTokenFormat = accessTokenFormat;
         }
 
@@ -58,16 +54,16 @@ namespace WebApplication.Controllers
         [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
         {
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);            
-            
+            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
             var roleClaimValues = ((ClaimsIdentity)User.Identity).FindAll(ClaimTypes.Role).Select(c => c.Value);
 
             var roles = string.Join(",", roleClaimValues);
-                                         
+
             return new UserInfoViewModel
             {
                 UserName = User.Identity.GetUserName(),
-                Email = ((ClaimsIdentity) User.Identity).FindFirstValue(ClaimTypes.Email),
+                Email = ((ClaimsIdentity)User.Identity).FindFirstValue(ClaimTypes.Email),
                 HasRegistered = externalLogin == null,
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null,
                 UserRoles = roles
@@ -93,16 +89,12 @@ namespace WebApplication.Controllers
                 return null;
             }
 
-            List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
-
-            foreach (IdentityUserLogin linkedAccount in user.Logins)
+            var logins = user.Logins.Select(linkedAccount => new UserLoginInfoViewModel
             {
-                logins.Add(new UserLoginInfoViewModel
-                {
-                    LoginProvider = linkedAccount.LoginProvider,
-                    ProviderKey = linkedAccount.ProviderKey
-                });
-            }
+                LoginProvider = linkedAccount.LoginProvider,
+                ProviderKey = linkedAccount.ProviderKey
+            })
+            .ToList();
 
             if (user.PasswordHash != null)
             {
@@ -131,10 +123,10 @@ namespace WebApplication.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -259,27 +251,25 @@ namespace WebApplication.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+            var user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 
-            bool hasRegistered = user != null;
+            var hasRegistered = user != null;
 
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
-                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(oAuthIdentity);
+                var oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager, OAuthDefaults.AuthenticationType);
+                var cookieIdentity = await user.GenerateUserIdentityAsync(UserManager, CookieAuthenticationDefaults.AuthenticationType);
+
+                var properties = ApplicationOAuthProvider.CreateProperties(oAuthIdentity);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
             {
                 IEnumerable<Claim> claims = externalLogin.GetClaims();
-                ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
+                var identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
                 Authentication.SignIn(identity);
             }
 
@@ -291,8 +281,7 @@ namespace WebApplication.Controllers
         [Route("ExternalLogins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
         {
-            IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
-            List<ExternalLoginViewModel> logins = new List<ExternalLoginViewModel>();
+            var descriptions = Authentication.GetExternalAuthenticationTypes();
 
             string state;
 
@@ -306,25 +295,20 @@ namespace WebApplication.Controllers
                 state = null;
             }
 
-            foreach (AuthenticationDescription description in descriptions)
+            return descriptions.Select(description => new ExternalLoginViewModel
             {
-                ExternalLoginViewModel login = new ExternalLoginViewModel
+                Name = description.Caption, Url = Url.Route("ExternalLogin", new
                 {
-                    Name = description.Caption,
-                    Url = Url.Route("ExternalLogin", new
-                    {
-                        provider = description.AuthenticationType,
-                        response_type = "token",
-                        client_id = Startup.PublicClientId,
-                        redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
-                        state = state
-                    }),
-                    State = state
-                };
-                logins.Add(login);
-            }
+                    provider = description.AuthenticationType, 
+                    response_type = "token", 
+                    client_id = Startup.PublicClientId, 
+                    redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri, 
+                    state
+                }),
 
-            return logins;
+                State = state
+
+            }).ToList();
         }
 
         // POST api/Account/Register
@@ -339,21 +323,16 @@ namespace WebApplication.Controllers
 
             var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email };
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            var result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
 
-            result = await UserManager.AddToRoleAsync(user.Id,DefaultUserRole);
+            result = await UserManager.AddToRoleAsync(user.Id, DefaultUserRole);
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
+            return !result.Succeeded ? GetErrorResult(result) : Ok();
         }
 
         // POST api/Account/RegisterExternal
@@ -368,14 +347,15 @@ namespace WebApplication.Controllers
             }
 
             var info = await Authentication.GetExternalLoginInfoAsync();
+
             if (info == null)
             {
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email != null ? model.Email : "" };
+            var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email ?? "" };
 
-            IdentityResult result = await UserManager.CreateAsync(user);
+            var result = await UserManager.CreateAsync(user);
 
             if (!result.Succeeded)
             {
@@ -383,20 +363,15 @@ namespace WebApplication.Controllers
             }
 
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
-                        
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result); 
-            }
-
-            result = await UserManager.AddToRoleAsync(user.Id, DefaultUserRole);
 
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
 
-            return Ok();
+            result = await UserManager.AddToRoleAsync(user.Id, DefaultUserRole);
+
+            return !result.Succeeded ? GetErrorResult(result) : Ok();
         }
 
         protected override void Dispose(bool disposing)
@@ -423,26 +398,23 @@ namespace WebApplication.Controllers
                 return InternalServerError();
             }
 
-            if (!result.Succeeded)
+            if (result.Succeeded) return null;
+
+            if (result.Errors != null)
             {
-                if (result.Errors != null)
+                foreach (string error in result.Errors)
                 {
-                    foreach (string error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
+                    ModelState.AddModelError("", error);
                 }
-
-                if (ModelState.IsValid)
-                {
-                    // No ModelState errors are available to send, so just return an empty BadRequest.
-                    return BadRequest();
-                }
-
-                return BadRequest(ModelState);
             }
 
-            return null;
+            if (ModelState.IsValid)
+            {
+                // No ModelState errors are available to send, so just return an empty BadRequest.
+                return BadRequest();
+            }
+
+            return BadRequest(ModelState);
         }
 
         private class ExternalLoginData
@@ -477,7 +449,7 @@ namespace WebApplication.Controllers
                     return null;
                 }
 
-                Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
+                var providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
 
                 if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer)
                     || String.IsNullOrEmpty(providerKeyClaim.Value))
@@ -513,9 +485,9 @@ namespace WebApplication.Controllers
                     throw new ArgumentException("strengthInBits must be evenly divisible by 8.", "strengthInBits");
                 }
 
-                int strengthInBytes = strengthInBits / bitsPerByte;
+                var strengthInBytes = strengthInBits / bitsPerByte;
 
-                byte[] data = new byte[strengthInBytes];
+                var data = new byte[strengthInBytes];
                 _random.GetBytes(data);
                 return HttpServerUtility.UrlTokenEncode(data);
             }

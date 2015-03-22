@@ -23,7 +23,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="hidden-xs" data-bind="visible: session.isLoggedIn()">
-                    <span class="navbar-text nofloat">User: <a href="#/manage" class="text-primary navbar-link" data-bind="text: session.userName()"></a></span>
+                    <span class="navbar-text nofloat">User : <a href="#/manage" class="text-primary navbar-link" data-bind="text: session.userName()"></a></span>
                 </li>
                 <li data-bind="visible: !session.isLoggedIn()">
                     <a href="#login" class="navbar-link">Sign in</a>
@@ -32,7 +32,7 @@
                     <a href="#" data-bind="click: logout,visible: session.isLoggedIn()">Log off</a>
                 </li>
                 <li class="visible-xs" data-bind="visible: session.isLoggedIn()">
-                    <a href="#/manage" class="text-primary" data-bind="text: 'User: ' + session.userName()"></a>
+                    <a href="#/manage" class="text-primary" data-bind="text: 'User : ' + session.userName()"></a>
                 </li>
                 <li>
                     <div class="loader" data-bind="css: { showLoader: session.isBusy() || router.isNavigating()}">
