@@ -13,3 +13,11 @@ E:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\Web
 E:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.pdb
 E:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.csprojResolveAssemblyReference.cache
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.csprojResolveAssemblyReference.cache
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\aspnet-WebApplication-20150320105023.mdf
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\aspnet-WebApplication-20150320105023_log.ldf
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\Ninject.dll
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\WebApplication.DAL.dll
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\EntityFramework.dll
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\WebApplication.DAL.pdb
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\Ninject.xml
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\EntityFramework.xml
