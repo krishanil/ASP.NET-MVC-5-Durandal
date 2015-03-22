@@ -168,7 +168,7 @@ define(['durandal/system', 'durandal/app', 'durandal/composition', 'durandal/act
                 activate:false,
                 transition: false
             };
-
+            
             if (dialogContext.attached) {
                 settings.attached = dialogContext.attached;
             }

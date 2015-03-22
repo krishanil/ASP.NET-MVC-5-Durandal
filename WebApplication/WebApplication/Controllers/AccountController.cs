@@ -23,7 +23,6 @@ namespace WebApplication.Controllers
             return View();
         }
         
-        [AllowAnonymous]
         public ViewResult Manage()
         {
             return View();

@@ -12,3 +12,4 @@ E:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\bin\Debug\Web
 E:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.dll
 E:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.pdb
 E:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.csprojResolveAssemblyReference.cache
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.csprojResolveAssemblyReference.cache

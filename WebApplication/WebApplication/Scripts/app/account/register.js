@@ -1,6 +1,6 @@
 ﻿define(['plugins/router', 'durandal/app', 'services/security', 'global/session', 'services/logger', 'jquery', 'knockout', 'knockout.validation'],
     function (router, app, security, session,logger, $, ko) {
-        debugger;
+        
         // Internal properties and functions
         function ExternalLoginProviderViewModel(data) {
             var self = this;

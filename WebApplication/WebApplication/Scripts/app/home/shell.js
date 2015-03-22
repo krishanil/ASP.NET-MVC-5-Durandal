@@ -18,12 +18,13 @@
             router.map([
                     { route: '', title: 'Welcome', moduleId: 'app/home/welcome', nav: true },
                     { route: 'welcome', title: 'Welcome', moduleId: 'app/home/welcome' },
-                    { route: 'home', title: 'home', moduleId: 'app/home/home' },
+                    { route: 'home', title: 'Home', moduleId: 'app/home/home', nav: true, requiredRoles: ['RegisteredUsers'] },
                     { route: 'register', moduleId: 'app/account/register', nav: false },
                     { route: 'login', moduleId: 'app/account/login', nav: false },
                     { route: 'registerExternal', moduleId: 'app/account/registerExternal', nav: false },
                     { route: 'manage', moduleId: 'app/account/manage', nav: false, requiredRoles: ['RegisteredUsers'] },
-                    { route: 'start', title: 'Get started', moduleId: 'app/home/start', nav: true, requiredRoles: ['RegisteredUsers'] }
+                    { route: 'start', title: 'Get started', moduleId: 'app/home/start', nav: true, requiredRoles: ['RegisteredUsers'] },
+                    { route: 'flickr', title: 'Flickr', moduleId: 'app/home/flickr', nav: true, requiredRoles: ['RegisteredUsers'] }
             ]).buildNavigationModel();
 
             router.guardRoute = function (routeInfo, params, instance) {

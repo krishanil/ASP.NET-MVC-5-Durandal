@@ -24,13 +24,22 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        [AllowAnonymous]
         public ViewResult Start()
         {
             return View();
         }
 
         public ViewResult Home()
+        {
+            return View();
+        }
+
+        public ViewResult Flickr()
+        {
+            return View();
+        }
+
+        public ViewResult Detail()
         {
             return View();
         }

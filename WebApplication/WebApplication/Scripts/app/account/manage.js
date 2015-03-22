@@ -73,19 +73,19 @@
             var self = this;
 
             // Data
-            self.newPassword = ko.observable("").extend({ required: true });
-            self.confirmPassword = ko.observable("").extend({ required: true, equal: self.newPassword });
+            self.NewPassword = ko.observable("").extend({ required: true });
+            self.ConfirmPassword = ko.observable("").extend({ required: true, equal: self.NewPassword });
 
             // Other UI state
-            self.validationErrors = ko.validation.group([self.newPassword, self.confirmPassword]);
+            self.validationErrors = ko.validation.group([self.NewPassword, self.ConfirmPassword]);
 
             // Operations
             self.set = function () {           
                 session.isBusy(true);
 
                 security.setPassword({
-                    newPassword: self.newPassword(),
-                    confirmPassword: self.confirmPassword()
+                    newPassword: self.NewPassword(),
+                    confirmPassword: self.ConfirmPassword()
                 }).done(function (data) {                    
                     parent.logins.push(new RemoveLoginViewModel({
                         loginProvider: parent.localLoginProvider(),
@@ -170,22 +170,23 @@
 
             // Private operations
             function reset() {                
-                self.oldPassword(null);
-                self.newPassword(null);
-                self.confirmPassword(null);                
+                self.OldPassword(null);
+                self.NewPassword(null);
+                self.ConfirmPassword(null);                
                 self.validationErrors.showAllMessages(false);
             }
 
             // Data
             self.name = ko.observable(name);
-            self.oldPassword = ko.observable("").extend({ required: true });
-            self.newPassword = ko.observable("").extend({ required: true });
-            self.confirmPassword = ko.observable("").extend({ required: true, equal: self.newPassword });
+            self.OldPassword = ko.observable("").extend({ required: true });
+            self.NewPassword = ko.observable("").extend({ required: true, minLength: 6 });
+            self.ConfirmPassword = ko.observable("").extend({ required: true, equal: self.NewPassword });
 
-            self.validationErrors = ko.validation.group([self.oldPassword, self.newPassword, self.confirmPassword]);
+            self.validationErrors = ko.validation.group([self.OldPassword, self.NewPassword, self.ConfirmPassword]);
 
             // Operations
-            self.change = function () {     
+            self.change = function () {
+                
                 if (self.validationErrors().length > 0) {
                     self.validationErrors.showAllMessages();
                     return;
@@ -193,9 +194,9 @@
                 session.isBusy(true);
 
                 security.changePassword({
-                    oldPassword: self.oldPassword(),
+                    oldPassword: self.OldPassword(),
                     newPassword: self.newPassword(),
-                    confirmPassword: self.confirmPassword()
+                    confirmPassword: self.ConfirmPassword()
                 }).done(function (data) {                    
                     reset();
                     logger.log({

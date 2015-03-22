@@ -1,5 +1,4 @@
 ﻿body {
-    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -35,8 +34,18 @@ a {
 }
 
 /* #region overload bootstrap */
-.navbar-default .navbar-nav> li > a {
-  font-size: medium;
-  margin-top: 0;
+.navbar-default .navbar-nav > li > a {
+    font-size: medium;
+    margin-top: 0;
+}
+
+.navbar-default .navbar-text {
+    margin-top: 13px;
+}
+
+.text-primary {
+    color: #df691a !important;
+    font-weight: bolder;
+}
 
 /* #endregion overload bootstrap */
