@@ -15,10 +15,7 @@ namespace WebApplication.DAL.Models
     
     public partial class Entities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
-        {
-        }
+        public Entities() : base("name=Entities") {}
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

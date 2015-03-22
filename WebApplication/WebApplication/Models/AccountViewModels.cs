@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace WebApplication.Models
+namespace WebApplication.DAL
 {
     // Models returned by AccountController actions.
 

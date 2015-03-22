@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using WebApplication.BLL.Managers.Account;
 using WebApplication.Providers;
-using WebApplication.Models;
+using WebApplication.DAL;
 
 [assembly: OwinStartup(typeof(WebApplication.Startup))]
 
@@ -26,8 +28,9 @@ namespace WebApplication
         public void ConfigureAuth(IAppBuilder app)
         {
             // Настройка контекста базы данных и диспетчера пользователей для использования одного экземпляра на запрос
+            DependencyResolver.Current.GetService<IAppUserManager>().SetOwinIdentityDbContext(app);
             app.CreatePerOwinContext(ApplicationDbContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
 
             // Включение использования файла cookie, в котором приложение может хранить информацию для пользователя, выполнившего вход,
             // и использование файла cookie для временного хранения информации о входах пользователя с помощью стороннего поставщика входа

@@ -12,7 +12,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using WebApplication.Models;
+using WebApplication.BLL.Managers.Account;
+using WebApplication.DAL;
 using WebApplication.Providers;
 using WebApplication.Results;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace WebApplication.Controllers
         private const string LocalLoginProvider = "Local";
         private const string DefaultUserRole = "RegisteredUsers";
 
-        private ApplicationUserManager _userManager;
+        private AppUserManager _userManager;
 
         public AccountApiController() : this(Startup.OAuthOptions.AccessTokenFormat) { }
 
@@ -35,11 +36,11 @@ namespace WebApplication.Controllers
             AccessTokenFormat = accessTokenFormat;
         }
 
-        public ApplicationUserManager UserManager
+        public AppUserManager UserManager
         {
             get
             {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? Request.GetOwinContext().GetUserManager<AppUserManager>();
             }
             private set
             {

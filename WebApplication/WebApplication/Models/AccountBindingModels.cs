@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication.Models
+namespace WebApplication.DAL
 {
     // Models used as parameters to AccountController actions.
 

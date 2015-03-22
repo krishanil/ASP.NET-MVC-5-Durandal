@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using WebApplication.BLL.Managers;
+using WebApplication.BLL.Managers.Account;
 
 namespace WebApplication.IoC
 {
@@ -28,6 +29,7 @@ namespace WebApplication.IoC
 
         private void AddBindings()
         {
+            kernel.Bind<IAppUserManager>().To<AppUserManager>();
             kernel.Bind<IAdminManager>().To<AdminManager>();
         }
     }
