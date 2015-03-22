@@ -171,4 +171,3 @@ D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\bin\ru\System.Web
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\bin\ru\System.Web.Optimization.resources.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
-D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache

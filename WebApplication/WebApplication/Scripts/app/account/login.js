@@ -34,8 +34,8 @@
             title: 'login',
             session: session,
             setFocus: ko.observable(true),
-            UserName: ko.observable("").extend({ required: true }),
-            Password: ko.observable("").extend({ required: true }),
+            UserName: ko.observable("").extend({ required: true, minLength: 10 }),
+            Password: ko.observable("").extend({ required: true, minLength: 6 }),
             RememberMe: ko.observable(false),
             externalLoginProviders: ko.observableArray(),
             loaded: false,
@@ -155,7 +155,6 @@
         }
 
         function register() {
-            debugger;
             router.navigate('#/register', 'replace');
         }
     });

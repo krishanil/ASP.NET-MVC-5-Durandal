@@ -11,7 +11,7 @@ namespace WebApplication.Utils.Extentions
             var valueBinding = ValueBinding(viewData.ModelMetadata.ModelType);
             var dataBinding = string.Format("{0}: {1}", valueBinding, viewData.ModelMetadata.PropertyName);
             var additionalBindings = viewData.ToList().FirstOrDefault(d => d.Key == "data_bind");
-            return additionalBindings.Value != null ? string.Format("{0}, {1}", dataBinding, additionalBindings) : dataBinding;
+            return additionalBindings.Value != null ? string.Format("{0}, {1}", dataBinding, additionalBindings.Value) : dataBinding;
         }
 
         private static string ValueBinding(Type modelType)

@@ -14,6 +14,7 @@ namespace WebApplication.Models
     public class LoginBindingModel
     {
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
@@ -49,7 +50,8 @@ namespace WebApplication.Models
     public class RegisterBindingModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
+        [Display(Name = "User name")]
         public string UserName { get; set; }
 
         [Required]

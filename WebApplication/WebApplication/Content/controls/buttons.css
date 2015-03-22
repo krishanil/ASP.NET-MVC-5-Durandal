@@ -15,7 +15,8 @@
     -o-transition: all 250ms ease-out;
     -webkit-transition: all 250ms ease-out;
     transition: all 250ms ease-out;
-    cursor: pointer
+    cursor: pointer;
+    font-weight: 600;
 }
 
     a.p-btn:before, a.p-btn:after {
@@ -189,7 +190,7 @@
 .paper-curl:hover:before, .paper-curl:hover:after,
 .paper-curl-right:hover:before,
 .paper-curl-right:hover:after {
-    box-shadow: 1px 8px 12px rgba(31, 31, 31, 0.8);
+    box-shadow: 1px 8px 12px #fff;
 }
 
 .paper-curl:hover:before,
@@ -247,7 +248,7 @@
 }
 
     .paper-curl-right-side:hover:before {
-        box-shadow: 10px -4px 12px rgba(31, 31, 31, 0.8);
+        box-shadow: 10px -4px 12px #fff;
         -moz-transform: skew(-8deg) rotate(-3deg);
         -ms-transform: skew(-8deg) rotate(-3deg);
         -o-transform: skew(-8deg) rotate(-3deg);
@@ -256,7 +257,7 @@
     }
 
     .paper-curl-right-side:hover:after {
-        box-shadow: 10px 4px 12px rgba(31, 31, 31, 0.8);
+        box-shadow: 10px 4px 12px #fff;
         -moz-transform: skew(8deg) rotate(3deg);
         -ms-transform: skew(8deg) rotate(3deg);
         -o-transform: skew(8deg) rotate(3deg);

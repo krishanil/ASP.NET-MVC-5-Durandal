@@ -26,7 +26,7 @@ else
     <input id="@ViewData.TemplateInfo.HtmlFieldPrefix"
            type="checkbox"
            class="tgl tgl-flip"
-        @ViewData.DataBinding()/>
-//           value="@ViewData.TemplateInfo.FormattedModelValue" />
+           data-bind="@ViewData.DataBinding()"/>
+    //           value="@ViewData.TemplateInfo.FormattedModelValue" />
     <label class="tgl-btn" data-tg-off="@no" data-tg-on="@yes" for="@ViewData.TemplateInfo.HtmlFieldPrefix"></label>
 }

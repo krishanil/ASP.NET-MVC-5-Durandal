@@ -1,6 +1,6 @@
 ﻿define(['plugins/router', 'durandal/app', 'services/security', 'global/session', 'services/logger', 'jquery', 'knockout', 'knockout.validation'],
     function (router, app, security, session,logger, $, ko) {
-
+        debugger;
         // Internal properties and functions
         function ExternalLoginProviderViewModel(data) {
             var self = this;
@@ -21,10 +21,10 @@
         }
 
         function reset() {
-            vm.userName("");
-            vm.email("");
-            vm.password("");            
-            vm.confirmPassword("");
+            vm.UserName("");
+            vm.Email("");
+            vm.Password("");            
+            vm.ConfirmPassword("");
             vm.setFocus(true);
             vm.validationErrors.showAllMessages(false);
         }
@@ -36,17 +36,17 @@
             title: 'register',
             session: session,
             setFocus: ko.observable(true),
-            userName: ko.observable("").extend({ required: true }),
-            email: ko.observable("").extend({ required: true, email: true }),
-            password: ko.observable("").extend({ required: true }),                  
+            UserName: ko.observable("").extend({ required: true, minLength: 10 }),
+            Email: ko.observable("").extend({ required: true, email: true }),
+            Password: ko.observable("").extend({ required: true, minLength: 6 }),
             register: register,
             externalLoginProviders: ko.observableArray(),
             loaded: false,
             login: login
         };
 
-        vm.confirmPassword = ko.observable("").extend({ required: true, equal: vm.password });
-        vm.validationErrors = ko.validation.group([vm.userName,vm.email, vm.password, vm.confirmPassword]);
+        vm.ConfirmPassword = ko.observable("").extend({ required: true, equal: vm.Password });
+        vm.validationErrors = ko.validation.group([vm.UserName,vm.Email, vm.Password, vm.ConfirmPassword]);
 
         return vm;
 
@@ -107,15 +107,15 @@
             session.isBusy(true);
 
             security.register({
-                userName: vm.userName(),
-                email: vm.email(),
-                password: vm.password(),
-                confirmPassword: vm.confirmPassword()
+                UserName: vm.UserName(),
+                Email: vm.Email(),
+                Password: vm.Password(),
+                ConfirmPassword: vm.ConfirmPassword()
             }).done(function (data) {
                 security.login({
                     grant_type: "password",
-                    username: vm.userName(),
-                    password: vm.password()
+                    username: vm.UserName(),
+                    password: vm.Password()
                 }).done(function (data) {                    
                     if (data.userName && data.access_token) {
                         session.setUser(data);

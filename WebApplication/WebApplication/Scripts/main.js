@@ -53,8 +53,8 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'durandal/vie
             ko.validation.init({
                 insertMessages: true,
                 decorateElement: true,
-                errorElementClass: 'has-error',
-                errorMessageClass: 'help-block'
+//                errorElementClass: 'has-error',
+//                errorMessageClass: 'help-block'
             });
 
             if (!ko.utils.cloneNodes) {
