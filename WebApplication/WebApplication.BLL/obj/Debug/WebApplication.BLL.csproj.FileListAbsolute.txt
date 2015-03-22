@@ -7,7 +7,6 @@ D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\Web
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\WebApplication.BLL.pdb
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.pdb
-D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.csprojResolveAssemblyReference.cache
 E:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\WebApplication.BLL.dll
 E:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\WebApplication.BLL.pdb
 E:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.dll

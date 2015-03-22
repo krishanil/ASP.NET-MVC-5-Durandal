@@ -1,17 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace WebApplication.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        [AllowAnonymous]
+        public ViewResult Loading()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Loading | Web application";
+            return View();
+        }
 
+        [AllowAnonymous]
+        public ViewResult Shell()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ViewResult Welcome()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ViewResult Start()
+        {
+            return View();
+        }
+
+        public ViewResult Home()
+        {
             return View();
         }
     }

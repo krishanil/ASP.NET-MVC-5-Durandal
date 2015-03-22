@@ -1,26 +1,26 @@
 exports.config = function(weyland) {
     weyland.build('main')
         .task.jshint({
-            include:'App/**/*.js'
+            include: 'Scripts/**/*.js'
         })
         .task.uglifyjs({
-            include:['App/**/*.js', 'Scripts/durandal/**/*.js']
+            include: ['Scripts/**/*.js', 'Scripts/lib/durandal/**/*.js']
         })
         .task.rjs({
-            include:['App/**/*.{js,html}', 'Scripts/durandal/**/*.js'],
+            include: ['Scripts/**/*.{js}', 'Scripts/lib/durandal/**/*.js'],
             loaderPluginExtensionMaps:{
                 '.html':'text'
             },
             rjs:{
-                name:'../Scripts/almond-custom', //to deploy with require.js, use the build's name here instead
+                name:'../Scripts/lib/almond-custom', //to deploy with require.js, use the build's name here instead
                 insertRequire:['main'], //not needed for require
-                baseUrl : 'App',
+                baseUrl: 'Scripts',
                 wrap:true, //not needed for require
                 paths : {
-                    'text': '../Scripts/text',
-                    'durandal': '../Scripts/durandal',
-                    'plugins': '../Scripts/durandal/plugins',
-                    'transitions': '../Scripts/durandal/transitions',
+                    'text': '../Scripts/lib/durandal/text',
+                    'durandal': '../Scripts/lib/durandal',
+                    'plugins': '../Scripts/lib/durandal/plugins',
+                    'transitions': '../Scripts/lib/durandal/transitions',
                     'knockout': 'empty:',
                     'bootstrap': 'empty:',
                     'jquery': 'empty:'
@@ -32,7 +32,7 @@ exports.config = function(weyland) {
                 },
                 stubModules : ['text'],
                 keepBuildDir: true,
-                out:'App/main-built.js'
+                out: 'Scripts/main-built.js'
             }
         });
 }

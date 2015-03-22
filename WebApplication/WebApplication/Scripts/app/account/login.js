@@ -20,9 +20,9 @@
         }
 
         function reset() {
-            vm.userName("");
-            vm.password("");
-            vm.rememberMe(false);
+            vm.UserName("");
+            vm.Password("");
+            vm.RememberMe(false);
             vm.setFocus(true);
             vm.validationErrors.showAllMessages(false);
         }
@@ -34,9 +34,9 @@
             title: 'login',
             session: session,
             setFocus: ko.observable(true),
-            userName: ko.observable("").extend({ required: true }),
-            password: ko.observable("").extend({ required: true }),
-            rememberMe: ko.observable(false),
+            UserName: ko.observable("").extend({ required: true }),
+            Password: ko.observable("").extend({ required: true }),
+            RememberMe: ko.observable(false),
             externalLoginProviders: ko.observableArray(),
             loaded: false,
             login: login,
@@ -44,7 +44,7 @@
         };
 
 
-        vm.validationErrors = ko.validation.group([vm.userName, vm.password]);
+        vm.validationErrors = ko.validation.group([vm.UserName, vm.Password]);
         vm.hasExternalLogin = ko.computed(function () {
             return vm.externalLoginProviders().length > 0;
         });
@@ -117,11 +117,11 @@
 
             security.login({
                 grant_type: "password",
-                username: vm.userName(),
-                password: vm.password()
+                username: vm.UserName(),
+                password: vm.Password()
             }).done(function (data) {
                 if (data.userName && data.access_token) {
-                    session.setUser(data, vm.rememberMe());
+                    session.setUser(data, vm.RememberMe());
                     router.navigate('#/', 'replace');
                 } else {
                     logger.log({
@@ -132,8 +132,8 @@
                     });
                 }
             }).always(function () {
-                vm.userName('');
-                vm.password('');
+                vm.UserName('');
+                vm.Password('');
                 session.isBusy(false);
             }).failJSON(function (data) {
                 if (data && data.error_description) {
@@ -155,6 +155,7 @@
         }
 
         function register() {
+            debugger;
             router.navigate('#/register', 'replace');
         }
     });

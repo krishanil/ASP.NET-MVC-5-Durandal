@@ -1,0 +1,199 @@
+﻿
+.controls {
+    text-align: left;
+    position: relative;
+}
+
+    .controls input[type="text"],
+    .controls input[type="email"],
+    .controls input[type="password"],
+    .controls input[type="tel"],
+    .controls textarea,
+    .controls button,
+    .controls select {
+        padding: 10px 5px 5px;
+        font-size: 14px;
+        border: 1px solid #c6c6c6;
+        width: 100%;
+        margin-bottom: 0;
+        color: #888;
+        font-family: 'Lato', 'sans-serif';
+        font-weight: 300;
+        background-color: #fff;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        -moz-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+        .controls input[type="text"]:focus, .controls input[type="text"]:hover,
+        .controls input[type="email"]:focus,
+        .controls input[type="email"]:hover,
+        .controls input[type="tel"]:focus,
+        .controls input[type="tel"]:hover,
+        .controls input[type="password"]:focus,
+        .controls input[type="password"]:hover,
+        .controls textarea:focus,
+        .controls textarea:hover,
+        .controls button:focus,
+        .controls button:hover,
+        .controls select:focus,
+        .controls select:hover {
+            outline: none;
+            border-color: #9FB1C1;
+            box-shadow: 1px 1px 3px #ccc;
+        }
+
+            .controls input[type="text"]:focus ~ label,
+            .controls input[type="text"]:hover ~ label,
+            .controls input[type="email"]:focus ~ label,
+            .controls input[type="email"]:hover ~ label,
+            .controls input[type="password"]:focus ~ label,
+            .controls input[type="password"]:hover ~ label,
+            .controls input[type="tel"]:focus ~ label,
+            .controls input[type="tel"]:hover ~ label,
+            .controls textarea:focus ~ label,
+            .controls textarea:hover ~ label,
+            .controls button:focus ~ label,
+            .controls button:hover ~ label,
+            .controls select:focus ~ label,
+            .controls select:hover ~ label,
+            .controls label:hover {
+                color: #888;
+                cursor: text;
+                background-color: #000000;
+                background-color: rgba(0, 0, 0, 0);
+            }
+
+            .controls input[type="text"]:focus ~ label.active,
+            .controls input[type="text"]:hover ~ label.active,
+            .controls input[type="email"]:focus ~ label.active,
+            .controls input[type="email"]:hover ~ label.active,
+            .controls input[type="password"]:focus ~ label.active,
+            .controls input[type="password"]:hover ~ label.active,
+            .controls input[type="tel"]:focus ~ label.active,
+            .controls input[type="tel"]:hover ~ label.active,
+            .controls textarea:focus ~ label.active,
+            .controls textarea:hover ~ label.active,
+            .controls button:focus ~ label.active,
+            .controls button:hover ~ label.active,
+            .controls select:focus ~ label.active,
+            .controls select:hover ~ label.active,
+            .controls label.active:hover {
+                color: #fff;
+                cursor: text;
+                background-color: #000000;
+                background-color: rgba(0, 0, 0, 0);
+            }
+
+    .controls .fa-sort {
+        position: absolute;
+        right: 10px;
+        top: 17px;
+        color: #999;
+    }
+
+    .controls select {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+    }
+
+    .controls label {
+        position: absolute;
+        left: 8px;
+        top: 10px;
+        color: #999;
+        font-size: 14px;
+        display: inline-block;
+        padding: 0 10px;
+        font-weight: 400;
+        background-color: #000000;
+        background-color: rgba(0, 0, 0, 0);
+        -moz-transition: color 0.1s, top 0.1s, background-image 1.3s;
+        -o-transition: color 0.1s, top 0.1s, background-image 1.3s;
+        -webkit-transition: color 0.1s, top 0.1s, background-image 1.3s;
+        transition: color 0.3s, top 0.1s, background-image 2s;
+        cursor: text;
+    }
+
+        .controls label.active {
+
+            top: -10px;
+            color: #ffffff;
+            background-color: #000000;
+            background-color: rgba(0, 0, 0, 0);
+            cursor: default;
+            /* IE10 Consumer Preview */
+            background-image: -ms-linear-gradient(bottom, #FFFFFF 0, #2B3E50 60%);
+            /* Mozilla Firefox */
+            background-image: -moz-linear-gradient(bottom, #FFFFFF 0, #2B3E50 60%);
+            /* Opera */
+            background-image: -o-linear-gradient(bottom, #FFFFFF 0, #2B3E50 60%);
+            /* Webkit (Safari/Chrome 10) */
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #FFFFFF), color-stop(0.6, #2B3E50));
+            /* Webkit (Chrome 11+) */
+            background-image: -webkit-linear-gradient(bottom, #FFFFFF 0, #2B3E50 60%);
+            /* W3C Markup, IE10 Release Preview */
+            background-image: linear-gradient(to top, #FFFFFF 0, #2B3E50 60%);
+
+        }
+
+    .controls textarea {
+        resize: none;
+        height: 200px;
+    }
+
+    .controls button {
+        cursor: pointer;
+        background-color: #07B3A1;
+        border: none;
+        color: #fff;
+        padding: 12px 0;
+    }
+
+        .controls button:hover {
+            background-color: #08ccb7;
+        }
+
+.floatLabel {
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0);
+    color: #999 !important;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: white !important;
+    color: #999 !important;
+}
+
+/* validation */
+span.validationMessage {
+    position: absolute;
+    left: 8px;
+    top: 30px;
+    color: red;
+    font-size: xx-small;
+    display: inline-block;
+    padding: 0 10px;
+    font-weight: 400;
+    background-color: white;
+    -moz-transition: color 0.3s, top 0.3s, background-color 0.8s;
+    -o-transition: color 0.3s, top 0.3s, background-color 0.8s;
+    -webkit-transition: color 0.3s, top 0.3s, background-color 0.8s;
+    transition: color 0.3s, top 0.3s, background-color 0.8s;
+    cursor: text;
+}
+
+label.error.active {
+    color: red;
+    text-shadow: none;
+}
+
+input.error {
+    border-bottom-color: red !important;
+    /*box-shadow: 0px 1px 1px red;*/
+}
