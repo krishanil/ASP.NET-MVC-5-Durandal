@@ -5,12 +5,12 @@ namespace WebApplication.DAL.Models.AccountContext
 {
     public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {
-        public AppIdentityDbContext() : base("Entities", throwIfV1Schema: false)
+        public AppIdentityDbContext() : base("DefaultConnection", throwIfV1Schema: false)
         {
             Database.SetInitializer(new AppDbInitializer());
         }
 
-        public static AppIdentityDbContext Create()
+        public AppIdentityDbContext Create()
         {
             return new AppIdentityDbContext();
         }

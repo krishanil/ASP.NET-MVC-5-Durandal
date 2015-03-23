@@ -243,8 +243,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoC\ViewLayerDependencyResolver.cs" />
-    <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -440,6 +438,10 @@
     <ProjectReference Include="..\WebApplication.BLL\WebApplication.BLL.csproj">
       <Project>{ea214ab7-f1d1-4b4f-91d1-e7ddbe14e0e4}</Project>
       <Name>WebApplication.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApplication.DAL\WebApplication.DAL.csproj">
+      <Project>{7963E4FF-D3BF-4FC9-B424-BD68D4179132}</Project>
+      <Name>WebApplication.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

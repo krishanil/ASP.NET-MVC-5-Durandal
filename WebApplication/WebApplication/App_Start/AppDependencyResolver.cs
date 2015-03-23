@@ -1,12 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.Reflection;
 using System.Web;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Mvc;
-using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Microsoft.AspNet.Identity.Owin;
 using Ninject;
 using Ninject.Web.Common;
+using Microsoft.Owin.Security;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Ninject.Web.WebApi;
 using WebApplication;
+using WebApplication.BLL.Managers;
+using WebApplication.BLL.Managers.Account;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
@@ -22,6 +28,12 @@ namespace WebApplication
                     Assembly.Load("WebApplication.BLL")
                 };
 
+        internal static void Init()
+        {
+            Bootstrapper.Initialize(CreateKernel);
+
+        }
+
         /// <summary>
         /// Starts the application
         /// </summary>
@@ -29,7 +41,6 @@ namespace WebApplication
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
-            Bootstrapper.Initialize(CreateKernel);
         }
 
         /// <summary>
@@ -54,6 +65,10 @@ namespace WebApplication
                 kernel.Load(NinjectModules);
 
                 RegisterServices(kernel);
+                DependencyResolver.SetResolver(new IoC.ViewLayerDependencyResolver(kernel));
+                
+                // Install our Ninject-based IDependencyResolver into the Web API config
+                GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
                 return kernel;
             }
             catch
@@ -69,7 +84,10 @@ namespace WebApplication
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            DependencyResolver.SetResolver(new IoC.ViewLayerDependencyResolver(kernel));
+            kernel.Bind<IAccountManager>().To<AccountManager>();
+            kernel.Bind<IAdminManager>().To<AdminManager>();
+            kernel.Bind<IAuthenticationManager>().ToMethod(c => HttpContext.Current.GetOwinContext().Authentication).InRequestScope();
+            kernel.Bind<AppUserManager>().ToMethod(c => HttpContext.Current.GetOwinContext().GetUserManager<AppUserManager>()).InRequestScope();
         }
     }
 }

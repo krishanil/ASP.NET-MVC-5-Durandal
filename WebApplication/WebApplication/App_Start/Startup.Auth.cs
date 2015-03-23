@@ -6,8 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using WebApplication.BLL.Managers.Account;
-using WebApplication.Providers;
-using WebApplication.DAL;
+using ApplicationOAuthProvider = WebApplication.Providers.ApplicationOAuthProvider;
 
 [assembly: OwinStartup(typeof(WebApplication.Startup))]
 
@@ -19,6 +18,13 @@ namespace WebApplication
 
         public static string PublicClientId { get; private set; }
 
+        public IAccountManager AccountManager {
+            get
+            {
+                return DependencyResolver.Current.GetService<IAccountManager>();
+            }
+        }
+
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
@@ -28,9 +34,7 @@ namespace WebApplication
         public void ConfigureAuth(IAppBuilder app)
         {
             // Настройка контекста базы данных и диспетчера пользователей для использования одного экземпляра на запрос
-            DependencyResolver.Current.GetService<IAppUserManager>().SetOwinIdentityDbContext(app);
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
-            app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
+            AccountManager.SetOwinContext(app);            
 
             // Включение использования файла cookie, в котором приложение может хранить информацию для пользователя, выполнившего вход,
             // и использование файла cookie для временного хранения информации о входах пользователя с помощью стороннего поставщика входа

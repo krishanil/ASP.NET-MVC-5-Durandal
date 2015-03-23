@@ -4,13 +4,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApplication.BLL.Managers.Account;
-using WebApplication.DAL;
 
 namespace WebApplication.Providers
 {
@@ -32,7 +30,7 @@ namespace WebApplication.Providers
         {
             var userManager = context.OwinContext.GetUserManager<AppUserManager>();
 
-            IdentityUser user = await userManager.FindAsync(context.UserName, context.Password);
+            var user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {
@@ -40,13 +38,13 @@ namespace WebApplication.Providers
                 return;
             }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
-                CookieAuthenticationDefaults.AuthenticationType);
+            var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, OAuthDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(oAuthIdentity);
-            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+            var cookiesIdentity = await user.GenerateUserIdentityAsync(userManager, CookieAuthenticationDefaults.AuthenticationType);
+
+            var properties = CreateProperties(oAuthIdentity);
+            var ticket = new AuthenticationTicket(oAuthIdentity, properties);
+            
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
@@ -74,14 +72,13 @@ namespace WebApplication.Providers
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
         {
-            if (context.ClientId == _publicClientId)
-            {
-                Uri expectedRootUri = new Uri(context.Request.Uri, "/");
+            if (context.ClientId != _publicClientId) return Task.FromResult<object>(null);
+            
+            var expectedRootUri = new Uri(context.Request.Uri, "/");
 
-                if (expectedRootUri.AbsoluteUri == context.RedirectUri)
-                {
-                    context.Validated();
-                }
+            if (expectedRootUri.AbsoluteUri == context.RedirectUri)
+            {
+                context.Validated();
             }
 
             return Task.FromResult<object>(null);
@@ -89,13 +86,13 @@ namespace WebApplication.Providers
 
         public static AuthenticationProperties CreateProperties(ClaimsIdentity identity)
         {
-            var roleClaimValues = ((ClaimsIdentity)identity).FindAll(ClaimTypes.Role).Select(c => c.Value);
+            var roleClaimValues = identity.FindAll(ClaimTypes.Role).Select(c => c.Value);
 
             var roles = string.Join(",", roleClaimValues);
 
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", ((ClaimsIdentity) identity).FindFirstValue(ClaimTypes.Name) },
+                { "userName", identity.FindFirstValue(ClaimTypes.Name) },
                 { "userRoles", roles }
             };
             return new AuthenticationProperties(data);

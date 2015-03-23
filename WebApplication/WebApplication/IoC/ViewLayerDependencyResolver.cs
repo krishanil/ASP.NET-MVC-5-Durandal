@@ -14,7 +14,7 @@ namespace WebApplication.IoC
         public ViewLayerDependencyResolver(IKernel kernelParam)
         {
             kernel = kernelParam;
-            AddBindings();
+//            AddBindings();
         }
 
         public object GetService(Type serviceType)
@@ -24,12 +24,19 @@ namespace WebApplication.IoC
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            return kernel.GetAll(serviceType);
+            try
+            {
+                return kernel.GetAll(serviceType);
+            }
+            catch (Exception)
+            {
+                return new List<object>();
+            }
         }
 
         private void AddBindings()
         {
-            kernel.Bind<IAppUserManager>().To<AppUserManager>();
+            kernel.Bind<IAccountManager>().To<AccountManager>();
             kernel.Bind<IAdminManager>().To<AdminManager>();
         }
     }

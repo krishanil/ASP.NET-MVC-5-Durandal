@@ -70,6 +70,7 @@
 
                            vm.loaded = true;
                        } else {
+                           debugger;
                            logger.log({                                                              
                                message: "Error loading external authentication providers.",
                                data: "",
@@ -80,6 +81,7 @@
                            vm.loaded = false;                       
                        }
                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                       debugger;
                        logger.log({
                            message: "Error loading external authentication providers." + errorThrown,
                            showToast: true,
