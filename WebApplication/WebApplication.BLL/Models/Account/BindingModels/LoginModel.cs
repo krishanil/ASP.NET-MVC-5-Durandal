@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApplication.BLL.Models.BindingModels
+namespace WebApplication.BLL.Models.Account.BindingModels
 {
     public class LoginModel
     {

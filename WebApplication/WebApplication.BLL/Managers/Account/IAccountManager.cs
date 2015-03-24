@@ -5,8 +5,8 @@ using System.Web.Http.Routing;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Owin;
-using WebApplication.BLL.Models.BindingModels;
-using WebApplication.BLL.Models.ViewModels;
+using WebApplication.BLL.Models.Account.BindingModels;
+using WebApplication.BLL.Models.Account.ViewModels;
 
 namespace WebApplication.BLL.Managers.Account
 {

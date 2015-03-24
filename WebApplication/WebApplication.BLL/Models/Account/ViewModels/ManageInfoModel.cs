@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WebApplication.BLL.Models.ViewModels
+namespace WebApplication.BLL.Models.Account.ViewModels
 {
     public class ManageInfoModel
     {

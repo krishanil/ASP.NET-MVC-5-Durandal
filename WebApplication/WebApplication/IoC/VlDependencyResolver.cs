@@ -1,20 +1,24 @@
-﻿using Ninject;
+﻿using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using WebApplication.BLL.Managers;
+using Ninject.Web.Common;
 using WebApplication.BLL.Managers.Account;
+using WebApplication.BLL.Managers.Admin;
 
 namespace WebApplication.IoC
 {
-    public class ViewLayerDependencyResolver : IDependencyResolver
+    public class VlDependencyResolver : IDependencyResolver
     {
-        private IKernel kernel;
+        private readonly IKernel kernel;
 
-        public ViewLayerDependencyResolver(IKernel kernelParam)
+        public VlDependencyResolver(IKernel kernelParam)
         {
             kernel = kernelParam;
-//            AddBindings();
+            AddBindings();
         }
 
         public object GetService(Type serviceType)
@@ -38,6 +42,9 @@ namespace WebApplication.IoC
         {
             kernel.Bind<IAccountManager>().To<AccountManager>();
             kernel.Bind<IAdminManager>().To<AdminManager>();
+
+            kernel.Bind<IAuthenticationManager>().ToMethod(c => HttpContext.Current.GetOwinContext().Authentication).InRequestScope();
+            kernel.Bind<AppUserManager>().ToMethod(c => HttpContext.Current.GetOwinContext().GetUserManager<AppUserManager>()).InRequestScope();
         }
     }
 }

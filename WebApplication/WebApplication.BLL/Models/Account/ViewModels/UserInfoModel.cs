@@ -1,4 +1,4 @@
-﻿namespace WebApplication.BLL.Models.ViewModels
+﻿namespace WebApplication.BLL.Models.Account.ViewModels
 {
     public class UserInfoModel
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Account
 {
     [Authorize]
     public class AccountController : Controller

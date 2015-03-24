@@ -10,11 +10,11 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApplication.BLL.Managers.Account;
-using WebApplication.BLL.Models.BindingModels;
-using WebApplication.BLL.Models.ViewModels;
+using WebApplication.BLL.Models.Account.BindingModels;
+using WebApplication.BLL.Models.Account.ViewModels;
 using WebApplication.Results;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Account
 {
     [Authorize]
     [RoutePrefix("api/Account")]

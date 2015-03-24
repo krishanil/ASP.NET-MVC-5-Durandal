@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Controllers.Home
 {
     [Authorize]
     public class HomeController : Controller

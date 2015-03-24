@@ -7,7 +7,7 @@ using WebApplication.DAL.Repositories.AdminRepository;
 
 namespace WebApplication.BLL.IoC
 {
-    public class BussinesLayerDependencyResolver : NinjectModule
+    public class BllDependencyResolver : NinjectModule
     {
         public override void Load()
         {
