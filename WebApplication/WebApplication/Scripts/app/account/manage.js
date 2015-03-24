@@ -195,7 +195,7 @@
 
                 security.changePassword({
                     oldPassword: self.OldPassword(),
-                    newPassword: self.newPassword(),
+                    newPassword: self.NewPassword(),
                     confirmPassword: self.ConfirmPassword()
                 }).done(function (data) {                    
                     reset();

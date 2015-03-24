@@ -249,6 +249,10 @@
     <Compile Include="Utils\Extentions\ViewDataExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\AppDB.mdf" />
+    <Content Include="App_Data\AppDB_log.ldf">
+      <DependentUpon>AppDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\controls\buttons.css" />
     <Content Include="Content\controls\checkbox.css" />
@@ -369,7 +373,9 @@
     <Content Include="Scripts\lib\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\lib\respond.min.js" />
     <Content Include="Scripts\lib\durandal\text.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

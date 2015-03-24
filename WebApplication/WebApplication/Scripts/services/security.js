@@ -160,7 +160,7 @@
             return $.ajax(registerUrl, {
                 type: "POST",
                 data: data
-            });
+            });            
         }
 
         function registerExternal(accessToken, data) {

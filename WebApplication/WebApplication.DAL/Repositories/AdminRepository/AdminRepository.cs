@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
+using WebApplication.DAL.Repositories.BaseRepository;
 
-namespace WebApplication.DAL.Repositories
+namespace WebApplication.DAL.Repositories.AdminRepository
 {
-    public class AdminRepository : IAdminRepository
+    public class AdminRepository : Repository, IAdminRepository 
     {
+        public AdminRepository(DbContext context) : base(context)
+        {
+        }
     }
 }

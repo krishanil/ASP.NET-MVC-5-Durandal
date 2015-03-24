@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using WebApplication.DAL.Models.AccountContext;
+using WebApplication.DAL.DataContext.AccountContext;
 
 namespace WebApplication.BLL.Managers.Account
 {
@@ -13,7 +14,7 @@ namespace WebApplication.BLL.Managers.Account
 
         public static AppUserManager Create(IdentityFactoryOptions<AppUserManager> options, IOwinContext context)
         {
-            var manager = new AppUserManager(new UserStore<AppUser>(context.Get<AppIdentityDbContext>()));
+            var manager = new AppUserManager(new UserStore<AppUser>((DbContext) context.Get<IAccountContext>()));
             
             // Настройка логики проверки имен пользователей
             manager.UserValidator = new UserValidator<AppUser>(manager)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -55,35 +56,35 @@ namespace WebApplication.Controllers
         [Route("ManageInfo")]
         public async Task<ManageInfoModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
-            return await AccountManager.GetManageInfo(User, returnUrl, generateState);            
+            return await AccountManager.GetManageInfo(User, returnUrl, generateState);
         }
 
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordModel model)
         {
-            return await RunTask(AccountManager.ChangePasswordAsync(User, model));
+            return await RunTask(() => AccountManager.ChangePasswordAsync(User, model));
         }
 
         // POST api/Account/SetPassword
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordModel model)
         {
-            return await RunTask(AccountManager.AddPasswordAsync(User, model));
+            return await RunTask(() => AccountManager.AddPasswordAsync(User, model));
         }
 
         // POST api/Account/AddExternalLogin
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginModel model)
         {
-            return await RunTask(AccountManager.AddExternalLogin(User, model, AccessTokenFormat.Unprotect(model.ExternalAccessToken)));
+            return await RunTask(() => AccountManager.AddExternalLogin(User, model, AccessTokenFormat.Unprotect(model.ExternalAccessToken)));
         }
 
         // POST api/Account/RemoveLogin
         [Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginModel model)
         {
-            return await RunTask(AccountManager.RemoveLogin(User, model));
+            return await RunTask(() => AccountManager.RemoveLogin(User, model));
         }
 
         // GET api/Account/ExternalLogin
@@ -108,7 +109,7 @@ namespace WebApplication.Controllers
             }
 
             AccountManager.SetExternalLogin(externalLogin, OAuthDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
-            
+
             return Ok();
         }
 
@@ -117,7 +118,7 @@ namespace WebApplication.Controllers
         [Route("ExternalLogins")]
         public IEnumerable<ExternalLoginModel> GetExternalLogins(string returnUrl, bool generateState = false)
         {
-            return AccountManager.GetExternalLogins(returnUrl.IsNullOrWhiteSpace() ? new Uri(Request.RequestUri, returnUrl).AbsoluteUri : returnUrl, generateState);            
+            return AccountManager.GetExternalLogins(returnUrl.IsNullOrWhiteSpace() ? new Uri(Request.RequestUri, returnUrl).AbsoluteUri : returnUrl, generateState);
         }
 
         // POST api/Account/Register
@@ -125,7 +126,7 @@ namespace WebApplication.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterModel model)
         {
-            return await RunTask(AccountManager.CreateAsync(model));
+            return await RunTask(() => AccountManager.CreateAsync(model));
         }
 
         // POST api/Account/RegisterExternal
@@ -134,32 +135,25 @@ namespace WebApplication.Controllers
         [Route("RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalModel model)
         {
-            return await RunTask(AccountManager.RegisterExternal(model));
+            return await RunTask(() => AccountManager.RegisterExternal(model));
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing) AccountManager.UserManagerDispose(disposing);
+            if (disposing) AccountManager.UserManagerDispose(true);
             base.Dispose(disposing);
         }
 
-        #region Helpers       
-
-        private async Task<IHttpActionResult> RunTask(Task<IdentityResult> function)
+        private async Task<IHttpActionResult> RunTask(Func<Task<IdentityResult>> function)
         {
-            return await GetResult(function) ?? Ok();
-        }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        private async Task<IHttpActionResult> GetResult(Task<IdentityResult> function)
-        {
-            if (ModelState.IsValid) return BadRequest(ModelState);
-
-            var result = await function;
+            var result = await function();
 
             if (result == null) return InternalServerError();
 
-            if (result.Errors == null) return null;
-
+            if (!result.Errors.Any()) return Ok();
+            
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error);
@@ -167,7 +161,5 @@ namespace WebApplication.Controllers
 
             return BadRequest(ModelState);
         }
-       
-        #endregion
     }
 }

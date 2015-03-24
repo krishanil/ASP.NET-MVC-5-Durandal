@@ -1,9 +1,9 @@
-﻿using System.Net.Http;
-using System.Web;
-using Microsoft.Owin.Security;
+﻿using System.Data.Entity;
 using Ninject.Modules;
-using WebApplication.DAL.Repositories;
+using WebApplication.DAL.DataContext;
+using WebApplication.DAL.DataContext.AccountContext;
 using WebApplication.DAL.Repositories.AccountRepository;
+using WebApplication.DAL.Repositories.AdminRepository;
 
 namespace WebApplication.BLL.IoC
 {
@@ -11,9 +11,12 @@ namespace WebApplication.BLL.IoC
     {
         public override void Load()
         {
-            Bind<IAccountRepository>().To<AccountRepository>();
-            Bind<IAdminRepository>().To<AdminRepository>();
+            Bind<DbContext>().To<AppDBEntities>();
 
+            Bind<IAccountRepository>().To<AccountRepository>();
+            Bind<IAccountContext>().To<AppIdentityDbContext>();
+
+            Bind<IAdminRepository>().To<AdminRepository>();
         }
     }
 }

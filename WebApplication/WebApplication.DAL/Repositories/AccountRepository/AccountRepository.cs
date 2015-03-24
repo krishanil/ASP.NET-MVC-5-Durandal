@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebApplication.DAL.Models.AccountContext;
+﻿using WebApplication.DAL.DataContext.AccountContext;
 
 namespace WebApplication.DAL.Repositories.AccountRepository
 {
     public class AccountRepository : IAccountRepository
     {
-        private AppIdentityDbContext context;
+        public IAccountContext Context { get; set; }
 
-        public AppIdentityDbContext Context { get { return context ?? (context = new AppIdentityDbContext()); } }
+        public AccountRepository(IAccountContext context)
+        {
+            Context = context;
+        }
     }
 }

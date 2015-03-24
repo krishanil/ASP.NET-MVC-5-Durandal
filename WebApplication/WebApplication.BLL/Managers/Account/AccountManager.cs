@@ -13,7 +13,8 @@ using Microsoft.Owin.Security;
 using Owin;
 using WebApplication.BLL.Models.BindingModels;
 using WebApplication.BLL.Models.ViewModels;
-using WebApplication.DAL.Models.AccountContext;
+using WebApplication.BLL.Providers;
+using WebApplication.DAL.DataContext.AccountContext;
 using WebApplication.DAL.Repositories.AccountRepository;
 
 namespace WebApplication.BLL.Managers.Account
@@ -22,8 +23,6 @@ namespace WebApplication.BLL.Managers.Account
     {
         private const string LocalLoginProvider = "Local";
         private const string DefaultUserRole = "RegisteredUsers";
-
-        private readonly AppUserManager userManager;
 
         public UrlHelper UrlManager { get; set; }
 
@@ -68,17 +67,14 @@ namespace WebApplication.BLL.Managers.Account
         {
             IdentityUser appUser = await UserManager.FindByIdAsync(user.Identity.GetUserId());
 
-            if (appUser == null)
-            {
-                return null;
-            }
+            if (appUser == null) return null;
 
             var logins = appUser.Logins.Select(linkedAccount => new UserLoginInfoModel
             {
                 LoginProvider = linkedAccount.LoginProvider,
                 ProviderKey = linkedAccount.ProviderKey
-            })
-            .ToList();
+
+            }).ToList();
 
             if (appUser.PasswordHash != null)
             {
@@ -101,7 +97,7 @@ namespace WebApplication.BLL.Managers.Account
 
         public IEnumerable<ExternalLoginModel> GetExternalLogins(string returnUrl, bool generateState = false)
         {
-            string state;
+            string state = null;
 
             var descriptions = AuthenticationManager.GetExternalAuthenticationTypes();
 
@@ -110,14 +106,12 @@ namespace WebApplication.BLL.Managers.Account
                 const int strengthInBits = 256;
                 state = RandomOAuthStateGenerator.Generate(strengthInBits);
             }
-            else
-            {
-                state = null;
-            }
 
             return descriptions.Select(description => new ExternalLoginModel
             {
+                State = state,
                 Name = description.Caption,
+                
                 Url = UrlManager.Route("ExternalLogin", new
                 {
                     provider = description.AuthenticationType,
@@ -126,8 +120,6 @@ namespace WebApplication.BLL.Managers.Account
                     redirect_uri = returnUrl,
                     state
                 }),
-
-                State = state
 
             }).ToList();
         }
@@ -159,23 +151,16 @@ namespace WebApplication.BLL.Managers.Account
 
             var externalData = ExternalLoginData.FromIdentity(ticket.Identity);
 
-            if (externalData == null)
-            {
-                return new IdentityResult("The external login is already associated with an account.");
-            }
+            if (externalData == null) return new IdentityResult("The external login is already associated with an account.");
 
             return await UserManager.AddLoginAsync(user.Identity.GetUserId(), new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
         }
 
         public async Task<IdentityResult> RemoveLogin(IPrincipal user, RemoveLoginModel model)
         {
-            if (model.LoginProvider == LocalLoginProvider)
-            {
-                return await UserManager.RemovePasswordAsync(user.Identity.GetUserId());
-            }
+            if (model.LoginProvider == LocalLoginProvider) return await UserManager.RemovePasswordAsync(user.Identity.GetUserId());
             
-            return await UserManager.RemoveLoginAsync(user.Identity.GetUserId(),
-                new UserLoginInfo(model.LoginProvider, model.ProviderKey));
+            return await UserManager.RemoveLoginAsync(user.Identity.GetUserId(), new UserLoginInfo(model.LoginProvider, model.ProviderKey));
         }
 
         public async void SetExternalLogin(ExternalLoginData externalLogin, string authenticationType, string cookies)
@@ -190,14 +175,15 @@ namespace WebApplication.BLL.Managers.Account
 
                 var oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager, authenticationType);
                 var cookieIdentity = await user.GenerateUserIdentityAsync(UserManager, cookies);
+                var properties = AuthenticationPropertiesConfig.CreateProperties(oAuthIdentity);
 
-//                var properties = ApplicationOAuthProvider.CreateProperties(oAuthIdentity);
-//                AuthenticationManager.SignIn(properties, oAuthIdentity, cookieIdentity);
+                AuthenticationManager.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
             {
                 IEnumerable<Claim> claims = externalLogin.GetClaims();
                 var identity = new ClaimsIdentity(claims, authenticationType);
+
                 AuthenticationManager.SignIn(identity);
             }
         }
@@ -206,7 +192,7 @@ namespace WebApplication.BLL.Managers.Account
         {
             var user = new AppUser { UserName = model.UserName, Email = model.Email };
             var result = await UserManager.CreateAsync(user, model.Password);
-            if (!result.Succeeded) return new IdentityResult("Failed to create user.");
+            if (!result.Succeeded) return result;
             return await UserManager.AddToRoleAsync(user.Id, DefaultUserRole);
         }
 
@@ -214,26 +200,17 @@ namespace WebApplication.BLL.Managers.Account
         {
             var info = await AuthenticationManager.GetExternalLoginInfoAsync();
 
-            if (info == null)
-            {
-                return new IdentityResult("External login info not found.");
-            }
+            if (info == null) return new IdentityResult("External login info not found.");
 
             var user = new AppUser { UserName = model.UserName, Email = model.Email ?? "" };
 
             var result = await UserManager.CreateAsync(user);
 
-            if (!result.Succeeded)
-            {
-                return new IdentityResult(result.Errors);
-            }
+            if (!result.Succeeded) return result;
 
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
 
-            if (!result.Succeeded)
-            {
-                return new IdentityResult(result.Errors);
-            }
+            if (!result.Succeeded) return result;
 
             return await UserManager.AddToRoleAsync(user.Id, DefaultUserRole);
         }
@@ -251,10 +228,7 @@ namespace WebApplication.BLL.Managers.Account
             {
                 const int bitsPerByte = 8;
 
-                if (strengthInBits % bitsPerByte != 0)
-                {
-                    throw new ArgumentException("strengthInBits must be evenly divisible by 8.", "strengthInBits");
-                }
+                if (strengthInBits % bitsPerByte != 0) throw new ArgumentException("strengthInBits must be evenly divisible by 8.", "strengthInBits");
 
                 var strengthInBytes = strengthInBits / bitsPerByte;
 

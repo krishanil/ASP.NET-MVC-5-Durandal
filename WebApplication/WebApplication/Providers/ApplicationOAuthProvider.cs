@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApplication.BLL.Managers.Account;
+using WebApplication.BLL.Providers;
 
 namespace WebApplication.Providers
 {
@@ -42,7 +39,7 @@ namespace WebApplication.Providers
 
             var cookiesIdentity = await user.GenerateUserIdentityAsync(userManager, CookieAuthenticationDefaults.AuthenticationType);
 
-            var properties = CreateProperties(oAuthIdentity);
+            var properties = AuthenticationPropertiesConfig.CreateProperties(oAuthIdentity);
             var ticket = new AuthenticationTicket(oAuthIdentity, properties);
             
             context.Validated(ticket);
@@ -51,7 +48,7 @@ namespace WebApplication.Providers
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {
-            foreach (KeyValuePair<string, string> property in context.Properties.Dictionary)
+            foreach (var property in context.Properties.Dictionary)
             {
                 context.AdditionalResponseParameters.Add(property.Key, property.Value);
             }
@@ -82,20 +79,6 @@ namespace WebApplication.Providers
             }
 
             return Task.FromResult<object>(null);
-        }
-
-        public static AuthenticationProperties CreateProperties(ClaimsIdentity identity)
-        {
-            var roleClaimValues = identity.FindAll(ClaimTypes.Role).Select(c => c.Value);
-
-            var roles = string.Join(",", roleClaimValues);
-
-            IDictionary<string, string> data = new Dictionary<string, string>
-            {
-                { "userName", identity.FindFirstValue(ClaimTypes.Name) },
-                { "userRoles", roles }
-            };
-            return new AuthenticationProperties(data);
-        }
+        }        
     }
 }
