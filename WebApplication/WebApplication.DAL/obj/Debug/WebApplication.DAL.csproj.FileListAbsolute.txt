@@ -32,4 +32,3 @@ D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\bin\Debug\ru\
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\bin\Debug\ru\Microsoft.AspNet.Identity.EntityFramework.resources.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.pdb
-D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.DAL\obj\Debug\WebApplication.DAL.csprojResolveAssemblyReference.cache

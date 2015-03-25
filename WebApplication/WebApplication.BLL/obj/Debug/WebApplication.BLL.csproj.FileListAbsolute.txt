@@ -68,3 +68,7 @@ D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\ru\
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.csprojResolveAssemblyReference.cache
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.dll
 D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\obj\Debug\WebApplication.BLL.pdb
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\ru\Microsoft.Owin.resources.dll
+D:\GitHub\ASP.NET-MVC-5-Durandal\WebApplication\WebApplication.BLL\bin\Debug\ru\Microsoft.Owin.Security.resources.dll
