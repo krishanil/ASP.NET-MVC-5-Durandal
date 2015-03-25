@@ -2,7 +2,7 @@
 
 namespace WebApplication.Controllers.Admin
 {
-    [Authorize]
+    [Authorize(Roles = "Administrators")]
     public class AdminController : Controller
     {
         public ActionResult Admin()

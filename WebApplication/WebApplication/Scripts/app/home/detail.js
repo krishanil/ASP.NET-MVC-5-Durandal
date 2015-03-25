@@ -7,7 +7,6 @@
         activate: function (data) {
             this.place(data.title);
             this.description(data.description);
-            debugger;
         }
     };
 

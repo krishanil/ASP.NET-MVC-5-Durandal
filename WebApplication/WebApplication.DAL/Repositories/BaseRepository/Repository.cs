@@ -12,14 +12,17 @@ namespace WebApplication.DAL.Repositories.BaseRepository
 
         public DbContext Context { get; set; }
 
-        protected Repository() { }
-
         public Repository(DbContext context)
         {
             Context = context;
         }
 
         #region base operations
+
+        public DbSet<T> Set<T>() where T : class
+        {
+            return Context.Set<T>();
+        }
 
         public IEnumerable<T> Set<T>(Expression<Func<T, bool>> lamda) where T : class
         {

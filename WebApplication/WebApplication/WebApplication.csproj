@@ -249,9 +249,9 @@
     <Compile Include="Utils\Extentions\ViewDataExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\AppDB.mdf" />
-    <Content Include="App_Data\AppDB_log.ldf">
-      <DependentUpon>AppDB.mdf</DependentUpon>
+    <Content Include="App_Data\DB.mdf" />
+    <Content Include="App_Data\DB_log.ldf">
+      <DependentUpon>DB.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\controls\buttons.css" />

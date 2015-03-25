@@ -11,7 +11,7 @@ namespace WebApplication.BLL.IoC
     {
         public override void Load()
         {
-            Bind<DbContext>().To<AppDBEntities>();
+            Bind<DbContext>().To<AppDbContext>();
 
             Bind<IAccountRepository>().To<AccountRepository>();
             Bind<IAccountContext>().To<AppIdentityDbContext>();

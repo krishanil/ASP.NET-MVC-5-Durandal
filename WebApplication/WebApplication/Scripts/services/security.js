@@ -72,7 +72,8 @@
             removeLogin: removeLogin,
             setPassword: setPassword,
             returnUrl: siteUrl,
-            toErrorString: toErrorString
+            toErrorString: toErrorString,
+            getData: getData,
         };
 
         $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
@@ -146,7 +147,7 @@
             return $.ajax(loginUrl, {
                 type: "POST",
                 data: data
-            });
+            });            
         }
 
         function logout() {
@@ -184,6 +185,14 @@
         function setPassword(data) {
             return $.ajax(setPasswordUrl, {
                 type: "POST",
+                data: data,
+                headers: getSecurityHeaders()
+            });
+        }
+
+        function getData(url, data) {
+            return $.ajax(url, {
+                type: "GET",
                 data: data,
                 headers: getSecurityHeaders()
             });

@@ -1,36 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using WebApplication.BLL.Managers.Admin;
+using WebApplication.BLL.Models.Admin;
 
 namespace WebApplication.Controllers.Admin
 {
-    [Authorize]
+    [Authorize(Roles = "Administrators")]
+    [RoutePrefix("api/Admin")]
     public class AdminApiController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        private IAdminManager Manager { get; set; }
+
+        public AdminApiController(IAdminManager manager)
         {
-            return new string[] { "value1", "value2" };
+            Manager = manager;
         }
 
-        // GET api/values/5
-        public string Get(int id)
+        // GET api/Admin/Users
+        [Route("Users")]
+        [HttpGet]
+        public IEnumerable<UserModel> Users()
         {
-            return "value";
-        }
-
-        // POST api/values
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
+            return Manager.Users();
         }
     }
 }

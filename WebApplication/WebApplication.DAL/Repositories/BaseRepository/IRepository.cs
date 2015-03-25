@@ -9,6 +9,8 @@ namespace WebApplication.DAL.Repositories.BaseRepository
     {
         DbContext Context { get; set; }
 
+        DbSet<T> Set<T>() where T : class;
+        
         IEnumerable<T> Set<T>(Expression<Func<T, bool>> lamda) where T : class;
 
         T Entity<T>(Expression<Func<T, bool>> lamda) where T : class;
