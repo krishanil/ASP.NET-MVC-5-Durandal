@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using WebApplication.BLL.Managers.Account;
@@ -26,8 +27,10 @@ namespace WebApplication.BLL.Providers
             return new AuthenticationProperties(data);
         }
 
-        public static async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context, AppUserManager userManager, string cookie)
+        public static async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context, string cookie)
         {
+            var userManager = context.OwinContext.GetUserManager<AppUserManager>();
+
             var user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
@@ -48,6 +51,4 @@ namespace WebApplication.BLL.Providers
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
     }
-
-
 }

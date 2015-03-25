@@ -24,8 +24,7 @@ namespace WebApplication.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<AppUserManager>();
-            await AuthenticationPropertiesConfig.GrantResourceOwnerCredentials(context, userManager, CookieAuthenticationDefaults.AuthenticationType);
+            await AuthenticationPropertiesConfig.GrantResourceOwnerCredentials(context, CookieAuthenticationDefaults.AuthenticationType);
         }        
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
